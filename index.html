@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chukwuma Ejekute-Obi | Cybersecurity Professional</title>
+    <title>Chukwuma Ejekute-Obi | Cybersecurity Student</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -21,10 +21,13 @@
         }
 
         header {
-            background: #B4CFEC;
+            background-image: url('images/UNT.jpg');
+            background-size: cover;
+            background-position: center;
             padding: 30px 0;
             text-align: center;
             color: #fff;
+            border: 5px solid #dee2e4;
         }
 
         header img {
@@ -37,10 +40,12 @@
         header h1 {
             margin-top: 20px;
             font-size: 2.5em;
+            color: #fff;
         }
 
         header p {
             font-size: 1.2em;
+            color: #fff;
         }
 
         nav {
@@ -88,12 +93,26 @@
             margin-bottom: 20px;
         }
 
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
         .image-gallery img {
             width: 300px;
             height: 300px;
             border: 2px solid #fff;
             object-fit: cover;
             border-radius: 10px;
+        }
+
+        .separator {
+            width: 100%;
+            height: 2px;
+            background-color: #ccc;
+            margin: 40px 0;
         }
 
         footer {
@@ -141,6 +160,13 @@
             background-color: #2a2a2a;
             color: #f4f4f4;
         }
+
+        .image-caption {
+            text-align: center;
+            margin-top: 10px;
+            color: #ccc;
+        }
+
     </style>
 </head>
 
@@ -164,47 +190,64 @@
     <section id="projects">
         <h2>My Projects</h2>
         <p>These are a few projects I've worked on during my journey in cybersecurity:</p>
+        
+        <div class="separator"></div>
+
         <ul class="projects">
             <li>✔ Network Security: Created SIEM tools for monitoring network traffic and setting severity levels on Microsoft Azure using Microsoft Sentinel, ensuring real-time visibility into potential threats and optimizing incident response on Microsoft cloud Azure.</li>
-            <ul class="procedure-steps">
-                <li>Create a Windows Virtual Machine on Azure.</li>
-                <li>Create a resource group, which serves as the container for all the objects we're creating.</li>
-                <li>Select the Windows 10 Pro ISO image for the virtual machine.</li>
-                <li>Set the administrative username and password for access control.</li>
-                <li>Select the "Allow Selected Ports" option, enabling RDP (3389) for network traffic.</li>
-                <li>Choose disk size and networking options based on your requirements.</li>
-                <li>Review the configuration and deploy the virtual machine if satisfied.</li>
-                <li>Ensure your virtual machine settings align with security best practices.</li>
-                <li>Deploy Microsoft Sentinel and link the resource group for resource tracking.</li>
-                <li>Name and configure the Log Analytics workspace, waiting for logs to be generated.</li>
-                <li>Add the virtual machine to the event logs, forwarding logs to Log Analytics and linking to Microsoft Sentinel.</li>
-                <li>Set up a data connector within the Microsoft Sentinel dashboard.</li>
-                <li>Install Windows Security Events via the Content Hub in Microsoft Sentinel.</li>
-                <li>Open the data connector and configure the necessary rules for data collection.</li>
-                <li>Verify that logs are being collected successfully from the connected systems.</li>
-                <li>Navigate to Microsoft Sentinel's log terminal, type "SecurityEvent", and analyze the data.</li>
-                <li>Create a rule in Microsoft Sentinel to log all successful logins: `| where Activity contains "success"`.</li>
-                <li>Create additional rules and assign severity levels based on the criticality of events.</li>
-                <li>Review all created rules within the Microsoft Sentinel Analytics page.</li>
-                <li>Log back into the system and verify alerts are triggered as configured, with severity levels applied.</li>
+            <ul class="procedure-steps of my project">
+                <li>- 1. Create a Windows Virtual Machine on Azure.</li>
+                <li>- 2. Create a resource group, which serves as the container for all the objects we're creating.</li>
+                <li>- 3. Select the Windows 10 Pro ISO image for the virtual machine.</li>
+                <li>- 4. Set the administrative username and password for access control.</li>
+                <li>- 5. Select the "Allow Selected Ports" option, enabling RDP (3389) for network traffic.</li>
+                <li>- 6. Choose disk size and networking options based on your requirements.</li>
+                <li>- 7. Review the configuration and deploy the virtual machine if satisfied.</li>
+                <li>- 8. Ensure your virtual machine settings align with security best practices.</li>
+                <li>- 9. Deploy Microsoft Sentinel and link the resource group for resource tracking.</li>
+                <li>- 10. Name and configure the Log Analytics workspace, waiting for logs to be generated.</li>
+                <li>- 11. Add the virtual machine to the event logs, forwarding logs to Log Analytics and linking to Microsoft Sentinel.</li>
+                <li>- 12. Set up a data connector within the Microsoft Sentinel dashboard.</li>
+                <li>- 13. Install Windows Security Events via the Content Hub in Microsoft Sentinel.</li>
+                <li>- 14. Open the data connector and configure the necessary rules for data collection.</li>
+                <li>- 15. Verify that logs are being collected successfully from the connected systems.</li>
+                <li>- 16. Navigate to Microsoft Sentinel's log terminal, type "SecurityEvent", and analyze the data.</li>
+                <li>- 17. Create a rule in Microsoft Sentinel to log all successful logins: `| where Activity contains "success"`.</li>
+                <li>- 18. Create additional rules and assign severity levels based on the criticality of events.</li>
+                <li>- 19. Review all created rules within the Microsoft Sentinel Analytics page.</li>
+                <li>- 20. Log back into the system and verify alerts are triggered as configured, with severity levels applied.</li>
             </ul>
+
+            <div class="separator"></div>
 
             <li>✔ Malware Analysis: Developed malware for testing in isolated virtual environments, focusing on understanding code behavior, identifying attack vectors, and analyzing specific ports and IP connections targeted by the malware.</li>
 
-            <!-- Image placeholders for Malware Analysis -->
             <div class="image-gallery">
                 <img src="images/Ransomware1.JPG" alt="Malware Analysis 1">
+                <div class="image-caption">1. Ransomware Development and deep dive code dissection with comments (analysis)</div>
+                
                 <img src="images/Ransomware2.JPG" alt="Malware Analysis 2">
+                <div class="image-caption">2. Ransomware Development code (analysis)</div>
+                
                 <img src="images/Ransomware3.JPG" alt="Malware Analysis 3">
+                <div class="image-caption">3. Ransomware Analysis</div>
             </div>
 
-            <li>✔ Ethical Hacking: Performed penetration testing on vulnerable systems within my local network, discovering weaknesses on my device and ways to secure devices and protect firmware by updating and mitigating known vulnerabilities.</li>
+            <div class="separator"></div>
+            
+            <li>
+                ✔ Ethical Hacking: Performed penetration testing on vulnerable systems within my local network, discovering weaknesses on my device and ways to secure devices and protect firmware by updating and mitigating known vulnerabilities.
+            </li>
 
-            <!-- Image placeholders for Ethical Hacking -->
             <div class="image-gallery">
                 <img src="images/Mitigation1.jpg" alt="Ethical Hacking 1">
+                <div class="image-caption">1. Penetration Testing - Vulnerability Discovery.</div>
+
                 <img src="images/Mitigation2.jpg" alt="Ethical Hacking 2">
+                <div class="image-caption">2. Examining the history of the vulnerability code ID.</div>
+
                 <img src="images/Mitigation3.JPG" alt="Ethical Hacking 3">
+                <div class="image-caption">3. Mitigation plan for strengthening physical hardware and internal functions.</div>
             </div>
 
         </ul>
@@ -224,4 +267,9 @@
 </body>
 
 </html>
+
+
+
+
+
 
