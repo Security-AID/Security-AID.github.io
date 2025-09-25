@@ -177,6 +177,8 @@
       display:grid; gap:18px; grid-template-columns:repeat( auto-fit, minmax(240px, 1fr) );
       margin-top:14px;
     }
+    /* tighter grid for full-stack thumbs */
+    .gallery.tight{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
     figure{
       margin:0; position:relative; overflow:hidden;
       border-radius:var(--radius-sm);
@@ -188,6 +190,7 @@
       width:100%; height:260px; object-fit:cover; display:block;
       transform:scale(1.02); transition:transform .35s ease, filter .35s ease;
     }
+    .gallery.tight figure img{height:220px}
     figure:hover img{transform:scale(1.07)}
     figcaption{
       padding:10px 12px; font-size:.92rem; color:var(--muted);
@@ -248,7 +251,7 @@
         <h2>About Me</h2>
         <p class="muted">Hello! I’m Chukwuma Ejekute-Obi, a passionate cybersecurity student aiming to become an ethical hacker in the future. My goal is to leverage my skills to identify and mitigate security threats while promoting a safer digital environment. I'm dedicated to mastering various security technologies and staying ahead on my studies in cybersecurity.</p>
       </div>
-      <div class="card glass about"></div>
+      <!-- removed the empty card that drew the border/bar -->
     </section>
 
     <!-- ====== PROJECTS ====== -->
@@ -328,6 +331,30 @@
             </figure>
           </div>
         </article>
+
+        <!-- NEW: Full-Stack Development (pic1.png ... pic16.png in repo root) -->
+        <article class="project card glass">
+          <h3><span class="pill">✔ Full-Stack Development</span> Selected app/screens showcasing UI builds and flows I coded end-to-end.</h3>
+          <div class="sep"></div>
+          <div class="gallery tight">
+            <figure><img src="pic1.png"  alt="Full-Stack 1"><figcaption>UI screen 1</figcaption></figure>
+            <figure><img src="pic2.png"  alt="Full-Stack 2"><figcaption>UI screen 2</figcaption></figure>
+            <figure><img src="pic3.png"  alt="Full-Stack 3"><figcaption>UI screen 3</figcaption></figure>
+            <figure><img src="pic4.png"  alt="Full-Stack 4"><figcaption>UI screen 4</figcaption></figure>
+            <figure><img src="pic5.png"  alt="Full-Stack 5"><figcaption>UI screen 5</figcaption></figure>
+            <figure><img src="pic6.png"  alt="Full-Stack 6"><figcaption>UI screen 6</figcaption></figure>
+            <figure><img src="pic7.png"  alt="Full-Stack 7"><figcaption>UI screen 7</figcaption></figure>
+            <figure><img src="pic8.png"  alt="Full-Stack 8"><figcaption>UI screen 8</figcaption></figure>
+            <figure><img src="pic9.png"  alt="Full-Stack 9"><figcaption>UI screen 9</figcaption></figure>
+            <figure><img src="pic10.png" alt="Full-Stack 10"><figcaption>UI screen 10</figcaption></figure>
+            <figure><img src="pic11.png" alt="Full-Stack 11"><figcaption>UI screen 11</figcaption></figure>
+            <figure><img src="pic12.png" alt="Full-Stack 12"><figcaption>UI screen 12</figcaption></figure>
+            <figure><img src="pic13.png" alt="Full-Stack 13"><figcaption>UI screen 13</figcaption></figure>
+            <figure><img src="pic14.png" alt="Full-Stack 14"><figcaption>UI screen 14</figcaption></figure>
+            <figure><img src="pic15.png" alt="Full-Stack 15"><figcaption>UI screen 15</figcaption></figure>
+            <figure><img src="pic16.png" alt="Full-Stack 16"><figcaption>UI screen 16</figcaption></figure>
+          </div>
+        </article>
       </div>
     </section>
   </main>
@@ -344,6 +371,104 @@
       </div>
     </div>
   </footer>
+
+  <!-- ===== Lightbox (paste above </body>) ===== -->
+<style>
+  .lb-backdrop{
+    position:fixed; inset:0; display:none; place-items:center;
+    background:rgba(0,0,0,.82); z-index:9999; backdrop-filter:saturate(130%) blur(2px);
+    animation:lbFade .18s ease;
+  }
+  .lb-backdrop.open{display:grid}
+  @keyframes lbFade{from{opacity:0}to{opacity:1}}
+  .lb-frame{
+    max-width:min(92vw, 1200px); max-height:86vh; position:relative;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .lb-img{
+    max-width:100%; max-height:80vh; object-fit:contain; border-radius:12px;
+    box-shadow:0 18px 50px rgba(0,0,0,.5);
+  }
+  .lb-cap{color:#eaeef6; text-align:center; font:600 14px/1.4 Inter, system-ui; opacity:.9}
+  .lb-x, .lb-prev, .lb-next{
+    position:absolute; top:-42px; width:36px; height:36px; display:grid; place-items:center;
+    border-radius:10px; background:rgba(255,255,255,.12); color:#fff; font-weight:800;
+    border:1px solid rgba(255,255,255,.2); cursor:pointer; user-select:none;
+    transition:transform .12s ease, background .12s ease;
+  }
+  .lb-x:hover, .lb-prev:hover, .lb-next:hover{background:rgba(255,255,255,.2); transform:translateY(-1px)}
+  .lb-x{right:0}
+  .lb-prev, .lb-next{top:50%; transform:translateY(-50%); width:44px; height:44px; font-size:20px}
+  .lb-prev{left:-56px} .lb-next{right:-56px}
+  @media (max-width:900px){ .lb-prev{left:8px} .lb-next{right:8px} .lb-x{top:8px; right:8px; background:rgba(0,0,0,.45)} }
+</style>
+
+<div class="lb-backdrop" id="lightbox" aria-hidden="true">
+  <div class="lb-frame" role="dialog" aria-label="Image preview">
+    <button class="lb-x" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+    <img class="lb-img" id="lbImg" alt="">
+    <button class="lb-next" id="lbNext" aria-label="Next">›</button>
+    <div class="lb-cap" id="lbCap"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const galleries = [...document.querySelectorAll('.gallery')].map(g => [...g.querySelectorAll('img')]);
+  const box = document.getElementById('lightbox');
+  const img = document.getElementById('lbImg');
+  const cap = document.getElementById('lbCap');
+  const btnPrev = document.getElementById('lbPrev');
+  const btnNext = document.getElementById('lbNext');
+  const btnClose = document.getElementById('lbClose');
+
+  let gIdx = 0, iIdx = 0;
+
+  const open = (g, i) => {
+    gIdx = g; iIdx = i;
+    const el = galleries[gIdx][iIdx];
+    img.src = el.src;
+    img.alt = el.alt || '';
+    cap.textContent = el.closest('figure')?.querySelector('figcaption')?.textContent?.trim() || '';
+    box.classList.add('open'); box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+  const close = () => {
+    box.classList.remove('open'); box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    img.src = ''; cap.textContent = '';
+  };
+  const nav = (dir) => {
+    const len = galleries[gIdx].length;
+    iIdx = (iIdx + dir + len) % len;
+    img.src = galleries[gIdx][iIdx].src;
+    cap.textContent = galleries[gIdx][iIdx].closest('figure')?.querySelector('figcaption')?.textContent?.trim() || '';
+  };
+
+  // click bind for all gallery images
+  galleries.forEach((imgs, g) => imgs.forEach((el, i) => {
+    el.loading = 'lazy';
+    el.style.cursor = 'zoom-in';
+    el.addEventListener('click', () => open(g, i));
+  }));
+
+  // controls
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', () => nav(-1));
+  btnNext.addEventListener('click', () => nav(1));
+  box.addEventListener('click', (e) => { if (e.target === box) close(); });
+
+  // keyboard
+  window.addEventListener('keydown', (e) => {
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') nav(-1);
+    if (e.key === 'ArrowRight') nav(1);
+  });
+})();
+</script>
+<!-- ===== /Lightbox ===== -->
+
 </body>
 </html>
-
