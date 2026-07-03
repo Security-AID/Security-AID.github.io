@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfectionPoint Threat Detection Engine</title>
+  <style>
+    :root { --bg:#0e1116; --panel:#17201b; --text:#f5f7fb; --muted:#c9d0da; --accent:#2cd66e; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(135deg,var(--bg),#0b1f14); color:var(--text); font:16px/1.7 Arial,sans-serif; }
+    main { width:min(920px,calc(100% - 32px)); margin:0 auto; padding:40px 0 72px; }
+    h1,h2,h3 { line-height:1.25; }
+    h1 { font-size:clamp(2rem,6vw,3.4rem); }
+    h2 { margin-top:42px; color:var(--accent); }
+    a { color:#79ffa6; }
+    .back { display:inline-block; margin-bottom:20px; }
+    .panel { padding:24px; border:1px solid #ffffff24; border-radius:16px; background:var(--panel); }
+    hr { border:0; height:1px; margin:32px 0; background:#ffffff24; }
+    figure { margin:24px 0; padding:12px; border:1px solid #ffffff24; border-radius:14px; background:#0b0f0d; }
+    figure img { display:block; width:100%; height:auto; border-radius:9px; }
+    figcaption { padding:12px 4px 2px; color:var(--muted); }
+    li { margin:6px 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="../index.html#projects">&larr; Back to projects</a>
+    <h1>InfectionPoint Threat Detection Engine</h1>
+    <hr>
+
+    <section class="panel">
+      <h2>Objective</h2>
+      <p>The objective of this project was to support malware detection and process monitoring inside the InfectionPoint security tool by integrating a VirusTotal API backend workflow and a PID Screamer monitoring feature.</p>
+      <p>For the VirusTotal API portion, I connected the scanner to VirusTotal so that when a file is scanned, the tool can check whether that file hash has already been analyzed. If VirusTotal has existing results and the file is flagged, the tool reports that information in the GUI activity log.</p>
+      <p>For PID Screamer, I worked on process monitoring based on CPU usage and suspicious indicators. The GUI, activity-log display, and kill-process functionality were developed collaboratively. I did not create the kill-process feature.</p>
+    </section>
+
+    <h2>Skills Learned</h2>
+    <ul>
+      <li>Integrated the VirusTotal API into a malware-scanning workflow.</li>
+      <li>Used file hashes to check for existing scan results.</li>
+      <li>Reported VirusTotal results in the GUI activity log.</li>
+      <li>Built and tested PID Screamer process monitoring.</li>
+      <li>Reviewed process behavior with Windows Task Manager and Linux <code>top</code>.</li>
+      <li>Documented collaborative security-tool development accurately.</li>
+    </ul>
+
+    <h2>Tools Used</h2>
+    <ul>
+      <li>VirusTotal API</li>
+      <li>PID Screamer</li>
+      <li>InfectionPoint GUI</li>
+      <li>File-hash checking and activity logging</li>
+      <li>Windows Task Manager and Linux <code>top</code></li>
+    </ul>
+
+    <h2>Steps</h2>
+    <h3>Ref 1: VirusTotal API Scan Output</h3>
+    <figure>
+      <img src="infectionpoint-virus-total.png" alt="InfectionPoint VirusTotal scan results">
+      <figcaption>The backend checks whether the file has existing VirusTotal results and reports the result and recommendation in the GUI activity log.</figcaption>
+    </figure>
+
+    <h3>Ref 2: PID Screamer Process Monitoring</h3>
+    <figure>
+      <img src="infectionpoint-pid-screamer.png" alt="PID Screamer process monitoring">
+      <figcaption>PID Screamer checks running processes and highlights behavior that may require further review.</figcaption>
+    </figure>
+
+    <h2>My Contribution</h2>
+    <ul>
+      <li>Integrated the VirusTotal API backend workflow.</li>
+      <li>Added logic to check for existing VirusTotal results.</li>
+      <li>Helped send scan results to the GUI activity log.</li>
+      <li>Worked on and tested PID Screamer process monitoring.</li>
+      <li>Documented scanner behavior and project results.</li>
+    </ul>
+    <p>The GUI layout, activity-log interface, and kill-process feature were developed collaboratively. The kill-process feature can terminate selected processes when administrative permissions are available.</p>
+
+    <h2>Summary</h2>
+    <p>This project helped me understand how security tools combine file-reputation checks, API-based threat intelligence, process monitoring, and GUI reporting. VirusTotal provided existing file-reputation results, while PID Screamer added process monitoring based on CPU usage and suspicious indicators.</p>
+  </main>
+</body>
+</html>
