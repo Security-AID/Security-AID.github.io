@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RDP Security Lab</title><style>
+:root{--bg:#0e1116;--bg2:#0b1f14;--panel:#17201b;--text:#f5f7fb;--muted:#c9d0da;--accent:#2cd66e}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,var(--bg),var(--bg2));color:var(--text);font:16px/1.7 Arial,sans-serif}
+main{width:min(980px,calc(100% - 32px));margin:auto;padding:40px 0 72px} h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.2} h2{margin-top:42px;color:var(--accent)} h3{margin-top:30px}
+a{color:#79ffa6}.back{display:inline-block;margin-bottom:20px}hr{border:0;height:1px;background:#ffffff24;margin:32px 0}p,li{color:#e8edf4}code{background:#ffffff12;padding:2px 5px;border-radius:5px}
+img{display:block;max-width:100%;height:auto;margin:18px auto;border-radius:12px;border:1px solid #ffffff24;box-shadow:0 10px 35px #0008}ul{padding-left:24px}li{margin:6px 0}
+</style></head>
+<body><main><a class="back" href="../index.html#projects">&larr; Back to projects</a><h1>RDP Security Lab</h1>
+<hr />
+<h2>Objective</h2>
+<p>The objective of this project was to understand how Windows name-resolution settings and Remote Desktop Protocol access can affect security inside an isolated virtual lab.</p>
+<p>I used a Windows victim virtual machine and a Kali Linux testing virtual machine in Oracle VirtualBox. On Windows, I tested a PowerShell automation tool that can enable defensive settings or place the machine into a deliberately vulnerable lab mode. Lab mode enabled LLMNR and NetBIOS and disabled Windows Firewall so I could observe the risks created by weaker network controls.</p>
+<p>From Kali Linux, I used Responder during the name-resolution test and FreeRDP to connect to the Windows system with an authorized lab account. I confirmed the remote session, demonstrated access by creating a harmless note, and then returned the environment to a safe state.</p>
+<p>All activity was performed in virtual machines that I controlled. No production system, public network, or third-party account was targeted.</p>
+<hr />
+<h2>Skills Learned</h2>
+<ul>
+<li>Built an isolated Windows and Kali Linux lab in Oracle VirtualBox.</li>
+<li>Tested RDP connectivity between two virtual machines.</li>
+<li>Used FreeRDP to create an authorized remote Windows session.</li>
+<li>Studied how LLMNR and NetBIOS name resolution can expose authentication material.</li>
+<li>Used Responder in a controlled lab to observe poisoned name-resolution responses.</li>
+<li>Built and tested a PowerShell menu for enabling defenses or lab mode.</li>
+<li>Reviewed the security impact of disabling Windows Firewall.</li>
+<li>Verified remote-session access without modifying important system data.</li>
+<li>Learned why command history and screenshots must not expose passwords or authentication hashes.</li>
+<li>Practiced restoring defensive settings after completing a security test.</li>
+</ul>
+<hr />
+<h2>Tools Used</h2>
+<ul>
+<li>Oracle VirtualBox</li>
+<li>Windows 10 virtual machine</li>
+<li>Kali Linux virtual machine</li>
+<li>Remote Desktop Protocol (RDP)</li>
+<li>FreeRDP</li>
+<li>Responder</li>
+<li>PowerShell</li>
+<li>Windows Firewall</li>
+<li>LLMNR and NetBIOS configuration</li>
+<li>Command Prompt</li>
+</ul>
+<hr />
+<h2>Steps</h2>
+<p>Every published screenshot includes a short explanation of what is being shown. Screenshots containing a lab password or captured NTLMv2 challenge-response were intentionally excluded from the public portfolio.</p>
+<h3>Ref 1: Windows Defense Automation Menu</h3>
+<p><img alt="PowerShell Windows communication automation menu" src="images/rdp/rdp-lab-01.png" /></p>
+<p>This screenshot shows the PowerShell menu used to enable defenses, enter lab mode, display the current status, or restart the Windows virtual machine. The command prompt below it shows an unsuccessful attempt to reach a deliberately named file server before the vulnerable configuration was active.</p>
+<hr />
+<h3>Ref 2: Deliberately Vulnerable Lab Mode</h3>
+<p><img alt="PowerShell lab mode enabling LLMNR and NetBIOS" src="images/rdp/rdp-lab-02.png" /></p>
+<p>This screenshot shows the script enabling LLMNR and NetBIOS and disabling Windows Firewall on the Windows VM. The script clearly warns that this mode is only for controlled testing and that the machine should be restarted so the TCP/IP changes fully apply.</p>
+<hr />
+<h3>Ref 3: Authorized FreeRDP Session</h3>
+<p><img alt="Kali FreeRDP session connected to Windows victim VM" src="images/rdp/rdp-lab-04.png" /></p>
+<p>This screenshot shows Kali Linux displaying a successful FreeRDP session to the Windows VM at <code>10.0.2.7</code>. The Windows lock screen remains visible in the second VirtualBox window, demonstrating the relationship between the local console and the active remote session.</p>
+<hr />
+<h3>Ref 4: Remote Access Verification</h3>
+<p><img alt="FreeRDP session with harmless verification note" src="images/rdp/rdp-lab-05.png" /></p>
+<p>This screenshot shows a harmless note created through the authorized remote session. The note confirms that remote access worked and reminds the lab operator to re-enable firewall security after the exercise.</p>
+<hr />
+<h3>Ref 5: Final Lab State</h3>
+<p><img alt="FreeRDP desktop and Windows victim lock screen" src="images/rdp/rdp-lab-06.png" /></p>
+<p>This screenshot shows the remote Windows desktop on the Kali side and the victim VM lock screen on the other side. It documents the final state of the two-machine RDP test before defensive settings were restored.</p>
+<hr />
+<h2>My Contribution</h2>
+<p>My main contributions were:</p>
+<ul>
+<li>Built and configured the Windows and Kali Linux virtual machines.</li>
+<li>Tested the PowerShell defense and lab-mode workflow.</li>
+<li>Enabled the vulnerable settings only inside the isolated lab.</li>
+<li>Observed LLMNR and NetBIOS behavior with Responder.</li>
+<li>Connected to the Windows VM through FreeRDP using an authorized lab account.</li>
+<li>Verified remote access with a harmless note.</li>
+<li>Documented the lab while excluding screenshots that exposed credential material.</li>
+<li>Reviewed the need to restore Windows Firewall and other defensive settings after testing.</li>
+</ul>
+<hr />
+<h2>Summary</h2>
+<p>This project helped me understand the connection between Windows name resolution, credential exposure, firewall configuration, and RDP access. The lab demonstrated how deliberately weakened settings can create opportunities for credential interception and remote access, while also showing why those settings must be isolated, documented, and reversed when testing is complete.</p>
+<p>The most important lesson was that successful technical testing is only part of the work. Safe lab boundaries, credential hygiene, evidence handling, and restoration of defensive controls are equally important parts of a professional security assessment.</p></main></body></html>
