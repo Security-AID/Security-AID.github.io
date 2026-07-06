@@ -1,544 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chukwuma Ejekute-Obi | Cybersecurity Student</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-  <style>
-    /* ========== THEME ========== */
-    :root{
-      --bg-1:#0e1116;
-      --bg-2:#0b1f14;
-      --panel:rgba(255,255,255,0.06);
-      --panel-strong:rgba(255,255,255,0.10);
-      --text:#f5f7fb;
-      --muted:#c9d0da;
-      --accent:#2cd66e;        /* UNT-inspired green pop */
-      --accent-2:#79ffa6;
-      --ring:rgba(44,214,110,.35);
-      --shadow:0 10px 40px rgba(0,0,0,.35);
-      --radius:18px;
-      --radius-sm:12px;
-      --max:1120px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      background: radial-gradient(1200px 800px at 10% -10%, #0b311f44, transparent 60%),
-                  radial-gradient(1200px 800px at 110% 10%, #1b143544, transparent 60%),
-                  linear-gradient(120deg, var(--bg-1), var(--bg-2));
-      min-height:100dvh;
-      overflow-x:hidden;
-    }
-
-    /* subtle animated gradient aura */
-    body::before{
-      content:"";
-      position:fixed; inset:-40vmax;
-      background:conic-gradient(from 180deg, #0b311f 0 25%, transparent 25% 50%, #1a1d28 50% 75%, transparent 75%);
-      filter:blur(120px) saturate(160%);
-      opacity:.18;
-      animation:spin 30s linear infinite;
-      z-index:-1;
-    }
-    @keyframes spin{to{transform:rotate(1turn)}}
-
-    .container{max-width:var(--max); margin:0 auto; padding:0 24px}
-
-    /* ========== HEADER / HERO ========== */
-    header{
-      position:relative;
-      overflow:hidden;
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .hero{
-      padding:72px 0 48px;
-      text-align:center;
-      position:relative;
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,.55)),
-        url('images/UNT.jpg') center/cover no-repeat;
-      box-shadow:var(--shadow);
-    }
-    .hero-inner{backdrop-filter:saturate(120%) blur(2px)}
-    .avatar{
-      width:140px; height:140px; border-radius:50%;
-      border:5px solid #fff; box-shadow:0 12px 40px rgba(0,0,0,.55), 0 0 0 10px var(--ring);
-      object-fit:cover;
-      transform:translateY(0); animation:float 6s ease-in-out infinite;
-    }
-    @keyframes float{50%{transform:translateY(-6px)}}
-
-    h1{font-family:Poppins, Inter, sans-serif; font-size:clamp(28px, 4.8vw, 44px); margin:16px 0 6px}
-    .subtitle{color:var(--muted); font-size:clamp(14px, 2.4vw, 18px)}
-
-    /* nav */
-    .nav{margin-top:20px; display:flex; justify-content:center; gap:14px; flex-wrap:wrap}
-    .nav a{
-      text-decoration:none; color:#0a0f0c; font-weight:700; letter-spacing:.2px;
-      background:linear-gradient(180deg, var(--accent), var(--accent-2));
-      padding:10px 16px; border-radius:999px; box-shadow:0 6px 18px rgba(44,214,110,.35);
-      transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
-    }
-    .nav a:hover{transform:translateY(-2px); filter:brightness(1.05); box-shadow:0 10px 24px rgba(44,214,110,.45)}
-    .nav a.secondary{
-      color:var(--text); background:transparent; border:1px solid rgba(255,255,255,.18);
-      box-shadow:none
-    }
-    .nav a.secondary:hover{background:var(--panel-strong)}
-
-    /* ========== SECTIONS ========== */
-    section{padding:72px 0}
-    .section-head{
-      text-align:center; margin-bottom:28px
-    }
-    .section-head h2{
-      font-family:Poppins, Inter, sans-serif;
-      font-size:clamp(24px, 4vw, 34px);
-      margin:0 0 10px;
-    }
-    .section-head p{color:var(--muted); max-width:800px; margin:0 auto}
-
-    /* ========== CARDS / PANELS ========== */
-    .card{
-      background:var(--panel);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .glass{
-      backdrop-filter: blur(10px) saturate(140%);
-      -webkit-backdrop-filter: blur(10px) saturate(140%);
-    }
-
-    /* About block */
-    .about{
-      padding:28px; line-height:1.8; font-size:1.05rem; color:#e7ecf3;
-    }
-
-    /* ========== PROJECTS ========== */
-    .projects-wrap{display:grid; gap:28px}
-    .project{
-      padding:24px;
-      position:relative;
-      overflow:hidden;
-      transition:transform .2s ease, border-color .2s ease, background .2s ease;
-    }
-    .project:hover{transform:translateY(-2px)}
-    .project h3{
-      display:flex; align-items:center; gap:10px;
-      font-size:1.15rem; margin:0 0 14px; font-weight:700; letter-spacing:.2px
-    }
-    .pill{
-      border:1px solid rgba(255,255,255,.18);
-      padding:6px 10px; border-radius:999px; color:#a6ffbf; background:rgba(44,214,110,.12); font-weight:700; font-size:.8rem;
-    }
-
-    /* Steps grid */
-    .procedure-steps{
-      list-style:none; margin:10px 0 0; padding:0;
-      display:grid; gap:12px; grid-template-columns:repeat( auto-fit, minmax(280px, 1fr) );
-      counter-reset: step;
-    }
-    .procedure-steps li{
-      counter-increment: step;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:var(--radius-sm);
-      padding:14px 14px 14px 52px;
-      position:relative; color:#e9eef8;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .procedure-steps li::before{
-      content:counter(step);
-      position:absolute; left:12px; top:12px;
-      width:28px; height:28px; display:grid; place-items:center;
-      border-radius:9px; font-weight:800; font-size:.9rem;
-      color:#062312;
-      background:linear-gradient(180deg, var(--accent), var(--accent-2));
-      box-shadow:0 6px 16px rgba(44,214,110,.35);
-    }
-    .procedure-steps li:hover{
-      transform:translateY(-2px);
-      border-color:rgba(44,214,110,.45);
-      box-shadow:0 8px 28px rgba(44,214,110,.18);
-    }
-
-    /* Gallery */
-    .gallery{
-      display:grid; gap:18px; grid-template-columns:repeat( auto-fit, minmax(240px, 1fr) );
-      margin-top:14px;
-    }
-    /* tighter grid for full-stack thumbs */
-    .gallery.tight{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-    figure{
-      margin:0; position:relative; overflow:hidden;
-      border-radius:var(--radius-sm);
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.03);
-      box-shadow:var(--shadow);
-    }
-    figure img{
-      width:100%; height:260px; object-fit:cover; display:block;
-      transform:scale(1.02); transition:transform .35s ease, filter .35s ease;
-    }
-    .gallery.tight figure img{height:220px}
-    figure:hover img{transform:scale(1.07)}
-    figcaption{
-      padding:10px 12px; font-size:.92rem; color:var(--muted);
-      border-top:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.25));
-    }
-
-    /* Separator line */
-    .sep{height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent); margin:22px 0}
-
-    /* Footer */
-    footer{
-      border-top:1px solid rgba(255,255,255,.08);
-      padding:32px 0 60px; color:var(--muted);
-      background:linear-gradient(180deg, transparent, rgba(255,255,255,.02));
-    }
-    .links{display:flex; gap:18px; justify-content:center; align-items:center; flex-wrap:wrap}
-    .link{
-      display:flex; gap:10px; align-items:center; text-decoration:none; color:var(--text);
-      padding:10px 14px; border-radius:12px; background:var(--panel); border:1px solid rgba(255,255,255,.14);
-      transition:transform .15s ease, background .15s ease, border-color .15s ease;
-    }
-    .link:hover{transform:translateY(-2px); background:var(--panel-strong); border-color:rgba(44,214,110,.35)}
-    .link img{width:20px; height:20px; object-fit:cover; filter:grayscale(20%)}
-
-    /* Small tweaks */
-    .muted{color:var(--muted)}
-    .mb-4{margin-bottom:18px}
-
-    /* Responsive hero spacing */
-    @media (min-width: 900px){
-      .hero{padding:96px 0 64px}
-    }
-  </style>
-</head>
-
-<body>
-  <!-- ====== HERO ====== -->
-  <header>
-    <div class="hero">
-      <div class="hero-inner container">
-        <img class="avatar" src="images/chuma.jpg" alt="Chukwuma Ejekute-Obi"/>
-        <h1>Chukwuma Ejekute-Obi</h1>
-        <p class="subtitle">Cybersecurity Student | Ethical Researcher | UI Developer</p>
-
-        <nav class="nav">
-          <a href="#about">About Me</a>
-          <a class="secondary" href="#projects">Projects</a>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- ====== ABOUT ====== -->
-    <section id="about" class="container">
-      <div class="section-head">
-        <h2>About Me</h2>
-        <p class="muted">Hello! I’m Chukwuma Ejekute-Obi, a passionate cybersecurity student aiming to become an ethical hacker in the future. My goal is to leverage my skills to identify and mitigate security threats while promoting a safer digital environment. I'm dedicated to mastering various security technologies and staying ahead on my studies in cybersecurity. I also do developement as a hobby and really enjoy building my vision, would love to bring that to a company as a software developer. </p>
-      </div>
-      <!-- removed the empty card that drew the border/bar -->
-    </section>
-
-    <!-- ====== PROJECTS ====== -->
-    <section id="projects" class="container">
-      <div class="section-head">
-        <h2>My Projects</h2>
-        <p class="muted">These are a few projects I've worked on during my journey in cybersecurity:</p>
-      </div>
-
-      <div class="projects-wrap">
-        <!-- Pixhawk Flight Control Research -->
-        <article class="project card glass">
-          <h3><span class="pill">&#10004; Embedded Security</span> Pixhawk Flight Control System Vulnerability Research</h3>
-          <div class="sep"></div>
-          <p class="muted">Documented a hardware-assisted firmware extraction workflow, flash-device identification, XGecu T48 setup, and preliminary IDA Pro analysis.</p>
-          <p><a class="link" href="projects/pixhawk-security-research.html">View the full Pixhawk research project</a></p>
-        </article>
-
-        <!-- RDP Security Lab -->
-        <article class="project card glass">
-          <h3><span class="pill">&#10004; Network Security</span> RDP Security Lab</h3>
-          <div class="sep"></div>
-          <p class="muted">Tested Windows defensive and lab-mode settings, LLMNR/NetBIOS exposure, Responder behavior, and authorized FreeRDP access in isolated virtual machines.</p>
-          <p><a class="link" href="projects/rdp-security-lab.html">View the full RDP security lab</a></p>
-        </article>
-
-        <!-- Network Detection Script -->
-        <article class="project card glass">
-          <h3><span class="pill">&#10004; Traffic Analysis</span> Network Detection Script</h3>
-          <div class="sep"></div>
-          <p class="muted">Built and tested a terminal-based detector that observes IPv4, IPv6, TCP, UDP, and DNS activity on authorized systems and networks.</p>
-          <p><a class="link" href="projects/network-detection-script.html">View the full Network Detection project</a></p>
-        </article>
-
-        <!-- InfectionPoint Threat Detection Engine -->
-        <article class="project card glass">
-          <h3><span class="pill">&#10004; Threat Detection</span> InfectionPoint combines VirusTotal file-reputation checks with PID Screamer process monitoring.</h3>
-          <div class="sep"></div>
-          <p class="muted">Integrated the VirusTotal API backend, reported scan results in the GUI activity log, and worked on CPU- and indicator-based process monitoring.</p>
-          <p><a class="link" href="projects/virustotal-mini-scanner.html">View the full InfectionPoint project</a></p>
-        </article>
-
-        <!-- Project 1 -->
-        <article class="project card glass">
-          <h3><span class="pill">✔ Network Security</span> Created SIEM tools on Microsoft Azure with Microsoft Sentinel for real-time visibility and incident response.</h3>
-          <div class="sep"></div>
-          <ul class="procedure-steps">
-            <li>1. Create a Windows Virtual Machine on Azure.</li>
-            <li>2. Create a resource group, which serves as the container for all the objects we're creating.</li>
-            <li>3. Select the Windows 10 Pro ISO image for the virtual machine.</li>
-            <li>4. Set the administrative username and password for access control.</li>
-            <li>5. Select the "Allow Selected Ports" option, enabling RDP (3389) for network traffic.</li>
-            <li>6. Choose disk size and networking options based on your requirements.</li>
-            <li>7. Review the configuration and deploy the virtual machine if satisfied.</li>
-            <li>8. Ensure your virtual machine settings align with security best practices.</li>
-            <li>9. Deploy Microsoft Sentinel and link the resource group for resource tracking.</li>
-            <li>10. Name and configure the Log Analytics workspace, waiting for logs to be generated.</li>
-            <li>11. Add the virtual machine to the event logs, forwarding logs to Log Analytics and linking to Microsoft Sentinel.</li>
-            <li>12. Set up a data connector within the Microsoft Sentinel dashboard.</li>
-            <li>13. Install Windows Security Events via the Content Hub in Microsoft Sentinel.</li>
-            <li>14. Open the data connector and configure the necessary rules for data collection.</li>
-            <li>15. Verify that logs are being collected successfully from the connected systems.</li>
-            <li>16. Navigate to Microsoft Sentinel's log terminal, type "SecurityEvent", and analyze the data.</li>
-            <li>17. Create a rule in Microsoft Sentinel to log all successful logins: <code>| where Activity contains "success"</code>.</li>
-            <li>18. Create additional rules and assign severity levels based on the criticality of events.</li>
-            <li>19. Review all created rules within the Microsoft Sentinel Analytics page.</li>
-            <li>20. Log back into the system and verify alerts are triggered as configured, with severity levels applied.</li>
-          </ul>
-        </article>
-
-        <!-- Project 2 -->
-        <article class="project card glass">
-          <h3><span class="pill">✔ Malware Analysis</span> Developed malware in isolated labs to understand behavior, attack vectors, and target ports/IPs.</h3>
-          <div class="sep"></div>
-
-          <div class="gallery">
-            <figure>
-              <img src="images/Ransomware1.JPG" alt="Ransomware Development – analysis 1">
-              <figcaption>1. Ransomware development & deep-dive code dissection with comments</figcaption>
-            </figure>
-            <figure>
-              <img src="images/Ransomware2.JPG" alt="Ransomware Development – analysis 2">
-              <figcaption>2. Ransomware development code (analysis)</figcaption>
-            </figure>
-            <figure>
-              <img src="images/Ransomware3.JPG" alt="Ransomware Analysis – results">
-              <figcaption>3. Ransomware analysis</figcaption>
-            </figure>
-          </div>
-        </article>
-
-        <!-- Project 3 -->
-        <article class="project card glass">
-          <h3><span class="pill">✔ Ethical Hacking</span> Pen-testing on my local network to find weaknesses and harden firmware/devices.</h3>
-          <div class="sep"></div>
-
-          <div class="gallery">
-            <figure>
-              <img src="images/Mitigation1.jpg" alt="Pen test – vulnerability discovery">
-              <figcaption>1. Penetration Testing — Vulnerability Discovery</figcaption>
-            </figure>
-            <figure>
-              <img src="images/Mitigation2.jpg" alt="CVE history review">
-              <figcaption>2. Examining the history of the vulnerability code ID</figcaption>
-            </figure>
-            <figure>
-              <img src="images/Mitigation3.JPG" alt="Mitigation plan">
-              <figcaption>3. Mitigation plan for strengthening physical hardware & internal functions</figcaption>
-            </figure>
-          </div>
-        </article>
-
-        <!-- NEW: Full-Stack Development (pic1.png ... pic16.png in repo root) -->
-        <article class="project card glass">
-          <h3><span class="pill">✔ Full-Stack Development</span> Selected app/screens showcasing UI builds and flows I coded end-to-end.</h3>
-          <div class="sep"></div>
-          <div class="gallery tight">
-            <figure><img src="pic1.png"  alt="Full-Stack 1"><figcaption>UI screen 1</figcaption></figure>
-            <figure><img src="pic2.png"  alt="Full-Stack 2"><figcaption>UI screen 2</figcaption></figure>
-            <figure><img src="pic3.png"  alt="Full-Stack 3"><figcaption>UI screen 3</figcaption></figure>
-            <figure><img src="pic4.png"  alt="Full-Stack 4"><figcaption>UI screen 4</figcaption></figure>
-            <figure><img src="pic5.png"  alt="Full-Stack 5"><figcaption>UI screen 5</figcaption></figure>
-            <figure><img src="pic6.png"  alt="Full-Stack 6"><figcaption>UI screen 6</figcaption></figure>
-            <figure><img src="pic7.png"  alt="Full-Stack 7"><figcaption>UI screen 7</figcaption></figure>
-            <figure><img src="pic8.png"  alt="Full-Stack 8"><figcaption>UI screen 8</figcaption></figure>
-            <figure><img src="pic9.png"  alt="Full-Stack 9"><figcaption>UI screen 9</figcaption></figure>
-            <figure><img src="pic10.png" alt="Full-Stack 10"><figcaption>UI screen 10</figcaption></figure>
-            <figure><img src="pic11.png" alt="Full-Stack 11"><figcaption>UI screen 11</figcaption></figure>
-            <figure><img src="pic12.png" alt="Full-Stack 12"><figcaption>UI screen 12</figcaption></figure>
-            <figure><img src="pic13.png" alt="Full-Stack 13"><figcaption>UI screen 13</figcaption></figure>
-            <figure><img src="pic14.png" alt="Full-Stack 14"><figcaption>UI screen 14</figcaption></figure>
-            <figure><img src="pic15.png" alt="Full-Stack 15"><figcaption>UI screen 15</figcaption></figure>
-            <figure><img src="pic16.png" alt="Full-Stack 16"><figcaption>UI screen 16</figcaption></figure>
-          </div>
-        </article>
-
-        <!-- NEW: Reverse Engineering -->
-        <article class="project card glass">
-          <h3><span class="pill">✔ Reverse Engineering</span> Extracted firmware binaries from hardware to analyze in IDA Pro for weakness discovery.</h3>
-          <div class="sep"></div>
-          <div class="gallery">
-            <figure>
-              <img src="reverse1.jpeg" alt="Dumping binary from circuit board (XGecu T48)">
-              <figcaption>Pulled binary off the device using the XGecu T48 programmer.</figcaption>
-            </figure>
-            <figure>
-              <img src="reverse2.jpeg" alt="IDA Pro disassembly view">
-              <figcaption>Loaded dump in IDA Pro to map functions and control flow.</figcaption>
-            </figure>
-            <figure>
-              <img src="reverse3.jpeg" alt="Finding logic for Pixhawk-related routines">
-              <figcaption>Reviewed routines to spot loops/edge cases that could impact Pixhawk ops.</figcaption>
-            </figure>
-          </div>
-        </article>
-
-        <!-- NEW: Web Security: XSS & CSRF -->
-        <article class="project card glass">
-          <h3><span class="pill">✔ Web Security: XSS & CSRF</span> Practiced client-side and session-level attacks to understand modern web risks.</h3>
-          <div class="sep"></div>
-          <div class="gallery">
-            <figure>
-              <img src="XSSCookieSteal.png" alt="Cookie theft via XSS payload">
-              <figcaption>XSS demo: injected script to exfiltrate session cookies to a controlled endpoint.</figcaption>
-            </figure>
-            <figure>
-              <img src="CSRF.png" alt="Cross-Site Request Forgery proof-of-concept">
-              <figcaption>CSRF PoC: forged state-changing request using victim’s credentials (no user click).</figcaption>
-            </figure>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="links">
-        <a class="link" href="mailto:chumaejekuteobi@gmail.com">
-          <img src="images/gmail-4561841_1280.webp" alt="Gmail icon"> chumaejekuteobi@gmail.com
-        </a>
-        <a class="link" href="https://www.linkedin.com/in/chukwuma-ejekute-obi-5a390925b" target="_blank" rel="noopener">
-          <img src="images/linkedin_3536505.jpg" alt="LinkedIn icon"> LinkedIn Profile
-        </a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ===== Lightbox (paste above </body>) ===== -->
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#05070d">
+<meta name="description" content="Chukwuma Ejekute-Obi — cybersecurity, detection engineering, malware analysis, and ethical research.">
+<title>Chukwuma Ejekute-Obi | Cybersecurity</title>
 <style>
-  .lb-backdrop{
-    position:fixed; inset:0; display:none; place-items:center;
-    background:rgba(0,0,0,.82); z-index:9999; backdrop-filter:saturate(130%) blur(2px);
-    animation:lbFade .18s ease;
-  }
-  .lb-backdrop.open{display:grid}
-  @keyframes lbFade{from{opacity:0}to{opacity:1}}
-  .lb-frame{
-    max-width:min(92vw, 1200px); max-height:86vh; position:relative;
-    display:flex; flex-direction:column; gap:10px;
-  }
-  .lb-img{
-    max-width:100%; max-height:80vh; object-fit:contain; border-radius:12px;
-    box-shadow:0 18px 50px rgba(0,0,0,.5);
-  }
-  .lb-cap{color:#eaeef6; text-align:center; font:600 14px/1.4 Inter, system-ui; opacity:.9}
-  .lb-x, .lb-prev, .lb-next{
-    position:absolute; top:-42px; width:36px; height:36px; display:grid; place-items:center;
-    border-radius:10px; background:rgba(255,255,255,.12); color:#fff; font-weight:800;
-    border:1px solid rgba(255,255,255,.2); cursor:pointer; user-select:none;
-    transition:transform .12s ease, background .12s ease;
-  }
-  .lb-x:hover, .lb-prev:hover, .lb-next:hover{background:rgba(255,255,255,.2); transform:translateY(-1px)}
-  .lb-x{right:0}
-  .lb-prev, .lb-next{top:50%; transform:translateY(-50%); width:44px; height:44px; font-size:20px}
-  .lb-prev{left:-56px} .lb-next{right:-56px}
-  @media (max-width:900px){ .lb-prev{left:8px} .lb-next{right:8px} .lb-x{top:8px; right:8px; background:rgba(0,0,0,.45)} }
+:root{--night:#03040b;--navy:#091020;--ice:#f6f3ff;--soft:#bbb7d1;--acid:#c6a8ff;--aqua:#6fd8ff;--violet:#8b5dff;--line:rgba(198,168,255,.18);--ease:cubic-bezier(.16,1,.3,1);--max:1240px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--night);color:var(--ice);font-family:Arial,"Helvetica Neue",sans-serif;line-height:1.55;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}.wrap{width:min(calc(100% - 44px),var(--max));margin:auto}a{color:inherit}.skip{position:fixed;top:-80px;left:20px;z-index:999;background:var(--acid);color:#06100d;padding:12px 18px}.skip:focus{top:20px}
+#flow{position:fixed;inset:0;width:100%;height:100%;z-index:-3;opacity:.9}.ambient{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(circle at var(--mx,70%) var(--my,20%),rgba(111,216,255,.11),transparent 26%),radial-gradient(circle at 18% 72%,rgba(139,93,255,.12),transparent 28%),linear-gradient(180deg,rgba(3,4,11,.15),rgba(3,4,11,.8))}
+.nav{position:fixed;inset:0 0 auto;z-index:70;padding:20px 0;transition:.4s}.nav.scrolled{padding:10px 0;background:rgba(5,7,13,.72);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}.nav-in{display:flex;align-items:center;justify-content:space-between}.logo{font-size:1.25rem;font-weight:900;text-decoration:none;letter-spacing:-.06em}.logo b{color:var(--acid)}.links{display:flex;gap:28px;align-items:center}.links a{text-decoration:none;color:var(--soft);text-transform:uppercase;font-size:.7rem;letter-spacing:.18em;font-weight:800}.links a:hover,.links a.active{color:var(--acid)}.mini-cta{border:1px solid var(--line);padding:10px 15px;border-radius:99px}
+.hero{min-height:100svh;display:grid;align-items:center;position:relative;isolation:isolate;padding:120px 0 55px}.hero-in{display:grid;grid-template-columns:1.18fr .82fr;align-items:center;gap:5vw}.tag{display:flex;align-items:center;gap:12px;color:var(--acid);font-size:.69rem;text-transform:uppercase;letter-spacing:.2em;font-weight:900}.tag:before{content:"";width:33px;height:1px;background:var(--acid)}h1{font-size:clamp(3.8rem,8.5vw,8rem);line-height:.8;letter-spacing:-.085em;margin:27px 0}.line{display:block;overflow:hidden;padding-bottom:.09em}.line span{display:block;transform:translateY(115%);animation:rise 1.15s var(--ease) forwards}.line:nth-child(2) span{animation-delay:.1s;background:linear-gradient(90deg,var(--acid),var(--aqua),#c6adff);background-clip:text;color:transparent}@keyframes rise{to{transform:none}}.lead{font-size:clamp(1rem,1.5vw,1.22rem);color:var(--soft);max-width:630px;margin:0 0 28px}.buttons{display:flex;flex-wrap:wrap;gap:12px}.btn{position:relative;display:inline-flex;align-items:center;gap:13px;padding:14px 19px;border:1px solid var(--line);border-radius:100px;text-decoration:none;font-weight:900;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;overflow:hidden;transition:.45s var(--ease)}.btn:before{content:"";position:absolute;inset:100% 0 auto;height:140%;background:var(--acid);border-radius:50% 50% 0 0;transition:.45s var(--ease);z-index:-1}.btn:hover{color:#06100d;transform:translateY(-3px);border-color:var(--acid)}.btn:hover:before{inset:-20% 0 auto}.btn.hot{background:var(--acid);color:#06100d;border-color:var(--acid)}
+.visual{position:relative;aspect-ratio:1/1.16;max-width:490px;justify-self:end;display:grid;place-items:center}.liquid{position:absolute;inset:-8%;filter:url(#goo);overflow:hidden}.blob{position:absolute;border-radius:50%;background:linear-gradient(135deg,var(--acid),var(--aqua) 55%,var(--violet));mix-blend-mode:screen;opacity:.83}.b1{width:70%;height:70%;top:4%;left:4%;animation:blob1 9s ease-in-out infinite}.b2{width:58%;height:58%;right:0;bottom:4%;animation:blob2 11s ease-in-out infinite}.b3{width:30%;height:30%;right:5%;top:9%;animation:blob3 7s ease-in-out infinite}@keyframes blob1{50%{transform:translate(18%,16%) scale(.84) rotate(120deg)}}@keyframes blob2{50%{transform:translate(-22%,-17%) scale(1.12) rotate(-110deg)}}@keyframes blob3{50%{transform:translate(-105%,100%) scale(.75)}}.photo-shell{width:76%;height:84%;position:relative;z-index:3;border-radius:48% 48% 28% 28%/40% 40% 20% 20%;padding:1px;background:linear-gradient(145deg,#ffffff99,transparent 45%,var(--acid));box-shadow:0 35px 90px #0009;animation:float 6s ease-in-out infinite}.photo-shell:after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,transparent 38%,#ffffff1c 49%,transparent 58%);background-size:230% 100%;animation:shine 5s infinite;pointer-events:none}.photo{width:100%;height:100%;display:block;object-fit:cover;object-position:52% 35%;border-radius:inherit;filter:saturate(.88) contrast(1.05)}@keyframes float{50%{transform:translateY(-13px) rotate(.5deg)}}@keyframes shine{0%,30%{background-position:170%}70%,100%{background-position:-70%}}.badge{position:absolute;z-index:5;right:-2%;bottom:12%;padding:13px 17px;border:1px solid #ffffff38;background:rgba(7,18,24,.64);backdrop-filter:blur(18px);border-radius:16px;font-size:.69rem;text-transform:uppercase;letter-spacing:.12em;font-weight:900;box-shadow:0 20px 50px #0008}.badge i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acid);box-shadow:0 0 0 6px #8dffc722,0 0 18px var(--acid);margin-right:9px}
+.ticker{border-block:1px solid var(--line);overflow:hidden;transform:rotate(-1deg);background:#080b18}.track{display:flex;width:max-content;animation:ticker 24s linear infinite;padding:16px 0}.track span{font-weight:900;font-size:.73rem;letter-spacing:.18em;text-transform:uppercase;color:#ddd7f4}.track span:after{content:"✦";color:var(--aqua);margin:0 28px}@keyframes ticker{to{transform:translateX(-50%)}}
+section{padding:130px 0}.head{display:grid;grid-template-columns:.55fr 1.45fr;gap:32px;margin-bottom:62px}.no{color:var(--acid);font-size:.68rem;letter-spacing:.2em;font-weight:900}.head h2{font-size:clamp(2.5rem,5.8vw,5.6rem);line-height:.92;letter-spacing:-.065em;margin:0}.head p{color:var(--soft);font-size:1.05rem;max-width:650px}.reveal{opacity:0;transform:translateY(55px);filter:blur(8px);transition:1s var(--ease)}.reveal.on{opacity:1;transform:none;filter:none}
+.about{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.glass{position:relative;border:1px solid var(--line);border-radius:30px;padding:clamp(28px,4vw,48px);overflow:hidden;background:linear-gradient(140deg,rgba(255,255,255,.07),rgba(255,255,255,.015));backdrop-filter:blur(17px);transform-style:preserve-3d}.glass:before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#8dffc71d,transparent 70%);left:var(--x,50%);top:var(--y,50%);transform:translate(-50%,-50%);pointer-events:none}.statement{font-size:clamp(1.55rem,3vw,2.6rem);line-height:1.2;letter-spacing:-.04em;margin:0}.statement em{font-style:normal;color:var(--acid)}.pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}.pill{border:1px solid var(--line);padding:8px 12px;border-radius:99px;font-size:.75rem;color:#c6d9d3}.facts{display:grid;gap:0}.fact{padding:19px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;color:var(--soft)}.fact b{color:var(--ice);text-align:right}
+.work-list{display:grid;gap:30px}.project{position:relative;display:grid;grid-template-columns:.78fr 1.22fr;min-height:470px;border-radius:34px;overflow:hidden;border:1px solid var(--line);background:rgba(8,18,27,.68);backdrop-filter:blur(14px);transition:.7s var(--ease)}.project:hover{transform:translateY(-9px);border-color:#8dffc75e;box-shadow:0 35px 100px #0008}.copy{padding:clamp(28px,4vw,48px);display:flex;flex-direction:column}.pn{font-size:.66rem;letter-spacing:.2em;color:var(--acid);font-weight:900}.copy h3{font-size:clamp(1.8rem,3.4vw,3.4rem);line-height:.95;letter-spacing:-.05em;margin:22px 0}.copy p{color:var(--soft);margin:0}.copy .pills{margin-top:auto}.screen{position:relative;overflow:hidden;background:radial-gradient(circle at 40% 40%,#164b47,#071015 63%)}.screen:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,#ffffff0d 46%,transparent 60%);transform:translateX(-100%);transition:1s}.project:hover .screen:after{transform:translateX(100%)}.screen img{position:absolute;width:72%;height:67%;object-fit:cover;border:1px solid #ffffff26;border-radius:18px;box-shadow:0 30px 70px #000b;transition:1s var(--ease)}.screen img:first-child{left:5%;top:9%;transform:rotate(-6deg)}.screen img:nth-child(2){right:-3%;bottom:-4%;transform:rotate(6deg)}.project:hover img:first-child{transform:rotate(-2deg) translateY(-13px)}.project:hover img:nth-child(2){transform:rotate(2deg) translateY(-18px)}.radar{position:absolute;inset:0;display:grid;place-items:center}.rings{width:75%;aspect-ratio:1;border:1px solid #8dffc744;border-radius:50%;position:relative;background:repeating-radial-gradient(circle,transparent 0 17%,#8dffc72b 17.3% 17.6%)}.rings:before{content:"";position:absolute;inset:50% 50% 0 0;background:linear-gradient(20deg,#8dffc755,transparent 68%);transform-origin:100% 0;animation:scan 3s linear infinite}.rings:after{content:"SECURITY EVENT";position:absolute;left:51%;top:27%;color:var(--acid);font-size:.58rem;letter-spacing:.14em;box-shadow:-5px 0 20px var(--acid)}@keyframes scan{to{transform:rotate(360deg)}}.workflow{border-top:1px solid var(--line);margin:-8px 0 12px}.workflow summary{cursor:pointer;padding:22px 4px;display:flex;justify-content:space-between;font-weight:900;list-style:none}.workflow summary:after{content:"+";color:var(--acid);font-size:1.3rem}.workflow[open] summary:after{content:"–"}.steps{display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;padding:4px 0 25px;counter-reset:n}.steps li{list-style:none;color:var(--soft);font-size:.86rem;padding-left:36px;position:relative}.steps li:before{counter-increment:n;content:counter(n,decimal-leading-zero);position:absolute;left:0;color:var(--acid);font-weight:900;font-size:.66rem}
+.contact-card{position:relative;text-align:center;border:1px solid #8dffc73d;border-radius:40px;padding:clamp(50px,9vw,110px) 25px;overflow:hidden;background:rgba(9,25,30,.58);backdrop-filter:blur(20px)}.contact-card:before,.contact-card:after{content:"";position:absolute;border-radius:50%;filter:blur(3px);opacity:.35}.contact-card:before{width:480px;height:480px;background:var(--aqua);left:-280px;top:-250px}.contact-card:after{width:500px;height:500px;background:var(--violet);right:-330px;bottom:-330px}.contact-card>*{position:relative;z-index:2}.contact-card h2{font-size:clamp(3rem,8vw,8rem);line-height:.82;letter-spacing:-.08em;margin:22px auto 32px;max-width:980px}.contact-card p{color:var(--soft);max-width:620px;margin:0 auto 30px}.contact-card .buttons{justify-content:center}footer{padding:28px 0;color:var(--soft);font-size:.74rem}.foot{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between}.cursor{position:fixed;width:14px;height:14px;border:1px solid var(--acid);border-radius:50%;z-index:100;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s}.cursor.big{width:55px;height:55px;background:#8dffc718}
+@media(max-width:850px){.links a:not(.mini-cta){display:none}.hero-in,.head,.about,.project{grid-template-columns:1fr}.visual{justify-self:center;width:min(90%,440px);margin-top:34px}.hero{padding-top:115px}.head{gap:15px}.screen{min-height:360px;order:-1}.steps{grid-template-columns:1fr}.cursor{display:none}section{padding:95px 0}.foot{flex-direction:column;gap:7px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none;filter:none}#flow,.cursor{display:none}}
+.booting{overflow:hidden}.loader{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:radial-gradient(circle at 50% 42%,#163249 0,#08131f 36%,#03060c 78%);overflow:hidden;transition:opacity .7s var(--ease),visibility .7s}.loader.done{opacity:0;visibility:hidden;pointer-events:none}.loader-grid{position:absolute;inset:-40%;background-image:linear-gradient(#8dffc70a 1px,transparent 1px),linear-gradient(90deg,#8dffc70a 1px,transparent 1px);background-size:56px 56px;transform:perspective(700px) rotateX(66deg);animation:loaderGrid 3s linear infinite;mask-image:linear-gradient(transparent 22%,black)}.loader-glow{position:absolute;width:min(90vw,760px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#5ae6ff24,transparent 65%);animation:breathe 2s ease-in-out infinite}.lock-stage{position:relative;z-index:2;display:grid;justify-items:center;transform-origin:50% 58%;animation:characterIdle 2s ease-in-out infinite;transition:transform 1.15s cubic-bezier(.72,0,.28,1),opacity .5s}.lock-mark{width:clamp(150px,20vw,220px);overflow:visible;filter:drop-shadow(0 24px 18px #0008) drop-shadow(0 0 25px #45d8ff55);transition:filter .5s}.shackle{transform-origin:72px 70px;transition:transform .82s cubic-bezier(.22,1.55,.36,1)}.lock-body{transform-origin:72px 118px;transition:transform .65s cubic-bezier(.22,1.6,.35,1)}.eye-pupils{transition:transform .35s var(--ease)}.eyelids{transform-origin:center;animation:blink 3.1s infinite}.keyhole{transform-origin:center;animation:keyPulse 1.35s ease-in-out infinite}.lock-shadow{transform-origin:center;animation:shadowIdle 2s ease-in-out infinite}.scan-ring{position:absolute;left:50%;top:47%;width:280px;height:280px;border:1px solid #8dffc72d;border-radius:50%;transform:translate(-50%,-50%);animation:scanRing 1.65s ease-out infinite}.spark{position:absolute;width:6px;height:6px;border-radius:50%;background:white;box-shadow:0 0 16px #8dffc7;opacity:0}.s1{left:28%;top:30%}.s2{right:27%;top:38%}.s3{right:35%;bottom:31%}.loader-copy{margin-top:26px;text-align:center;transition:.4s}.loader-status{display:block;color:var(--acid);font-size:.64rem;font-weight:900;letter-spacing:.28em;text-transform:uppercase;text-shadow:0 0 18px #8dffc777}.loader-line{display:block;width:190px;height:2px;background:#ffffff17;margin-top:13px;border-radius:3px;overflow:hidden}.loader-line:after{content:"";display:block;width:45%;height:100%;background:linear-gradient(90deg,transparent,var(--acid),transparent);animation:loadingLine 1.05s linear infinite}.loader.thinking .lock-stage{animation:characterThink .7s var(--ease) both}.loader.thinking .eye-pupils{transform:translate(5px,-1px)}.loader.unlock .shackle{transform:translateY(-27px) rotate(-24deg)}.loader.unlock .lock-body{transform:scale(1.08,.92) translateY(5px)}.loader.unlock .lock-mark{filter:drop-shadow(0 30px 20px #0007) drop-shadow(0 0 42px #8dffc7aa)}.loader.celebrate .lock-stage{animation:characterCelebrate .8s cubic-bezier(.25,1.7,.4,1) both}.loader.celebrate .lock-body{transform:scale(.94,1.08) translateY(-5px)}.loader.celebrate .eye-pupils{transform:translateY(-2px)}.loader.celebrate .spark{animation:sparkle .75s ease-out both}.loader.celebrate .s2{animation-delay:.12s}.loader.celebrate .s3{animation-delay:.22s}.loader.enter .lock-stage{animation:none;transform:scale(20);opacity:0}.whiteout{position:absolute;inset:0;background:white;opacity:0;pointer-events:none}.loader.enter .whiteout{animation:whiteFlash 1.15s .3s var(--ease) forwards}.booting main,.booting footer,.booting .nav{visibility:hidden}.booting .line span,.booting .photo-shell,.booting .blob{animation-play-state:paused!important}@keyframes characterIdle{50%{transform:translateY(-9px) rotate(.8deg)}}@keyframes shadowIdle{50%{transform:scaleX(.82);opacity:.28}}@keyframes characterThink{0%{transform:none}40%{transform:translateY(8px) scale(1.06,.91) rotate(-3deg)}100%{transform:translateY(-3px) rotate(2deg)}}@keyframes characterCelebrate{0%{transform:translateY(4px) scale(1.08,.9)}48%{transform:translateY(-35px) scale(.92,1.1) rotate(5deg)}75%{transform:translateY(3px) scale(1.07,.94) rotate(-2deg)}100%{transform:none}}@keyframes blink{0%,44%,50%,100%{transform:scaleY(1)}46%,48%{transform:scaleY(.08)}}@keyframes sparkle{0%{opacity:0;transform:scale(0)}45%{opacity:1;transform:scale(2.2)}100%{opacity:0;transform:scale(.2) translateY(-24px)}}@keyframes loaderGrid{to{background-position:56px 56px}}@keyframes breathe{50%{transform:scale(1.13);opacity:.55}}@keyframes keyPulse{50%{transform:scale(.9);filter:drop-shadow(0 0 7px #8dffc7)}}@keyframes scanRing{0%{transform:translate(-50%,-50%) scale(.35);opacity:1}100%{transform:translate(-50%,-50%) scale(1.55);opacity:0}}@keyframes loadingLine{to{transform:translateX(230%)}}@keyframes whiteFlash{0%{opacity:0}42%,74%{opacity:1}100%{opacity:0}}@media(prefers-reduced-motion:reduce){.loader-grid,.loader-glow,.keyhole,.scan-ring,.loader-line:after,.lock-stage,.eyelids,.lock-shadow{animation:none!important}}
+.loader{background:#03040b;transition:opacity .65s var(--ease),visibility .65s}.loader-grid{background-image:linear-gradient(#c6a8ff12 1px,transparent 1px),linear-gradient(90deg,#c6a8ff12 1px,transparent 1px);transform:perspective(700px) rotateX(65deg);animation-duration:2.5s;mask-image:none}.loader-glow{width:min(80vw,700px);background:radial-gradient(circle,#8b5dff2f,transparent 67%);animation-duration:1.8s}.lock-stage{animation:none;transform-origin:center;transition:transform 1.05s cubic-bezier(.7,0,.3,1),opacity .45s}.lock-mark{width:clamp(120px,17vw,190px);filter:drop-shadow(0 0 28px #6fd8ff66)}.shackle{transform-origin:72px 68px;transition:transform .8s cubic-bezier(.34,1.56,.64,1)}.lock-body{transform-origin:center;transition:transform .7s var(--ease)}.scan-ring{width:260px;height:260px;animation-duration:1.5s}.loader-copy{margin-top:34px}.loader-status{text-shadow:none}.loader-line{height:1px}.loader.unlock .shackle{transform:translateY(-22px) rotate(-22deg)}.loader.unlock .lock-mark{filter:drop-shadow(0 0 38px #c6a8ffaa)}.loader.unlock .lock-body{transform:scale(1.04)}.loader.enter .lock-stage{animation:none;transform:scale(18);opacity:0}.loader.enter .whiteout{animation:whiteFlash 1.05s .28s var(--ease) forwards}.spark{display:none}
+.project{background:linear-gradient(145deg,rgba(15,18,39,.88),rgba(7,9,23,.72));box-shadow:inset 0 1px #ffffff0a}.project:hover{border-color:#8b5dff88;box-shadow:0 35px 110px #02030acc,0 0 48px #6f4eff18}.screen{background:radial-gradient(circle at 35% 35%,#352065,#11132b 52%,#060713 100%)}.contact-card{border-color:#c6a8ff4d;background:linear-gradient(145deg,rgba(20,22,50,.8),rgba(8,10,27,.82))}.nav.scrolled{background:rgba(3,4,11,.8)}.cursor.big{background:#c6a8ff1f}.glass:before{background:radial-gradient(circle,#8b5dff2c,transparent 70%)}.badge{background:rgba(12,14,34,.78)}.badge i{box-shadow:0 0 0 6px #6fd8ff24,0 0 18px var(--aqua)}.pill{color:#ddd7f4}.photo-shell{box-shadow:0 35px 100px #000c,0 0 55px #8b5dff22}.contact-card:before{background:var(--aqua)}.contact-card:after{background:var(--violet)}
+.cosmos{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 52% 115%,#24164f 0,transparent 48%),radial-gradient(ellipse at 9% 8%,#102e57 0,transparent 38%),linear-gradient(180deg,#01020a 0%,#050719 48%,#080516 100%)}.milky-way{position:absolute;width:145vw;height:42vh;left:-22vw;top:28%;transform:rotate(-18deg);background:linear-gradient(180deg,transparent,rgba(132,105,255,.055) 18%,rgba(213,202,255,.18) 48%,rgba(82,181,255,.08) 68%,transparent);filter:blur(24px);animation:galaxyPulse 10s ease-in-out infinite alternate}.milky-way:after{content:"";position:absolute;inset:34% 0;background:repeating-linear-gradient(90deg,transparent 0 5%,rgba(255,255,255,.13) 5.05% 5.12%,transparent 5.18% 9%);filter:blur(3px)}.moon{position:absolute;width:min(27vw,340px);aspect-ratio:1;right:-5%;top:9%;border-radius:50%;opacity:.76;background:radial-gradient(circle at 34% 28%,#f9f7ff 0 5%,#bfc2d9 24%,#747993 59%,#292e49 100%);box-shadow:inset -42px -32px 55px #090b1dcc,0 0 55px #c6d7ff4d,0 0 150px #8b5dff38;animation:moonFloat 13s ease-in-out infinite alternate}.moon:before,.moon:after{content:"";position:absolute;border-radius:50%;background:#454a6599;box-shadow:inset 4px 4px 8px #20243c99}.moon:before{width:21%;height:18%;left:22%;top:25%;box-shadow:inset 5px 5px 9px #20243c99,90px 72px 0 -9px #51567188,37px 135px 0 -15px #3d425e88}.moon:after{width:12%;height:10%;right:24%;top:19%;box-shadow:inset 3px 3px 7px #20243c99,-22px 111px 0 -4px #484d6988}.space-rocks{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;perspective:900px}.space-rocks i{position:absolute;display:block;width:var(--s);height:calc(var(--s)*.72);left:var(--x);top:var(--y);border-radius:43% 57% 55% 45%/58% 39% 61% 42%;background:radial-gradient(circle at 27% 22%,#aaa8bd 0 5%,#666a80 15%,#33374e 38%,#131627 72%,#070914 100%);box-shadow:inset -16px -14px 25px #02030bcc,5px 12px 28px #000a,0 0 26px #9d83ff24;opacity:var(--o);animation:rockDrift var(--d) ease-in-out infinite alternate;transform:translateZ(var(--z,0)) rotate(var(--r));filter:drop-shadow(0 18px 16px #0008)}.space-rocks i:before,.space-rocks i:after{content:"";position:absolute;border-radius:50%;background:#111426aa;box-shadow:inset 3px 3px 6px #8f91a733}.space-rocks i:before{width:24%;height:28%;left:18%;top:22%}.space-rocks i:after{width:17%;height:21%;right:18%;bottom:18%}@keyframes rockDrift{to{transform:translate3d(var(--dx),var(--dy),var(--z,0)) rotate(calc(var(--r) + 34deg))}}@keyframes moonFloat{to{transform:translate(-24px,18px) rotate(5deg)}}@keyframes galaxyPulse{to{opacity:.68;transform:rotate(-16deg) scale(1.05)}}@media(max-width:850px){.moon{width:210px;right:-82px;top:11%;opacity:.52}.milky-way{top:34%;height:30vh}.space-rocks i:nth-child(n+5){display:none}}@media(prefers-reduced-motion:reduce){.space-rocks i,.moon,.milky-way{animation:none!important}}
+.cosmos{z-index:-4}
+.loader{background:radial-gradient(circle at 50% 45%,#101b42 0,#050819 38%,#010207 78%)}.loader-grid{opacity:.24;transform:perspective(650px) rotateX(72deg) translateY(12%)}.loader-glow{background:radial-gradient(circle,#6fd8ff24,transparent 64%)}.ship-stage{width:min(88vw,610px);animation:shipHover 3.1s ease-in-out infinite!important;transition:transform 1.35s cubic-bezier(.68,0,.23,1),opacity .48s!important}.spaceship{position:relative;width:100%;aspect-ratio:1.8/1;filter:drop-shadow(0 34px 28px #000b) drop-shadow(0 0 38px #6fd8ff35)}.ship-hull{position:absolute;inset:11% 4% 7%;clip-path:polygon(13% 12%,37% 0,63% 0,87% 12%,100% 55%,88% 86%,64% 100%,36% 100%,12% 86%,0 55%);background:linear-gradient(145deg,#9aa6c4 0,#3e4969 18%,#111a38 53%,#080d22 78%,#4c5a7c 100%);border:2px solid #a7c8ff66;box-shadow:inset 0 0 0 7px #ffffff09,inset 0 -32px 55px #01030dcc}.ship-hull:before,.ship-hull:after{content:"";position:absolute;top:26%;width:25%;height:35%;background:linear-gradient(160deg,#9edfff66,#172340 72%);border:1px solid #bfe9ff55;box-shadow:inset 0 0 20px #6fd8ff27}.ship-hull:before{left:6%;clip-path:polygon(0 15%,100% 0,86% 100%,17% 82%)}.ship-hull:after{right:6%;clip-path:polygon(0 0,100% 15%,83% 82%,14% 100%)}.ship-wing{position:absolute;top:42%;width:23%;height:31%;background:linear-gradient(180deg,#445170,#0a1027);border:1px solid #8ba9d466;z-index:-1}.ship-wing.left{left:-8%;clip-path:polygon(100% 0,63% 8%,0 100%,100% 72%)}.ship-wing.right{right:-8%;clip-path:polygon(0 0,37% 8%,100% 100%,0 72%)}.engine{position:absolute;bottom:2%;width:16%;height:16%;border-radius:50%;background:radial-gradient(circle,#fff 0 7%,#6fd8ff 14%,#336bff 31%,#161d5f 57%,#030510 72%);box-shadow:0 0 20px #6fd8ff,0 20px 50px #315aff99;animation:enginePulse 1.1s ease-in-out infinite}.engine.left{left:19%}.engine.right{right:19%}.airlock{position:absolute;z-index:5;width:34%;aspect-ratio:1;left:33%;top:17%;border-radius:50%;padding:9px;background:linear-gradient(145deg,#bed2f0,#384766 38%,#10172e 72%);box-shadow:0 0 0 3px #080c1b,0 0 0 5px #7385aa,0 0 40px #6fd8ff44}.door-frame{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;background:radial-gradient(circle,#edfaff 0,#6fd8ff 22%,#27396c 55%,#040610 72%);box-shadow:inset 0 0 25px #000}.door-left,.door-right{position:absolute;z-index:2;top:0;width:51%;height:100%;background:linear-gradient(90deg,#111a35,#63708d 48%,#16213f);border-block:1px solid #9fb8df66;transition:transform .92s cubic-bezier(.65,0,.35,1)}.door-left{left:0;border-right:1px solid #b9d8ff;clip-path:polygon(0 0,100% 13%,87% 50%,100% 87%,0 100%)}.door-right{right:0;border-left:1px solid #b9d8ff;clip-path:polygon(0 13%,100% 0,100% 100%,0 87%,13% 50%)}.door-core{position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle,#fff 0 9%,#b6ecff 21%,#6b7dff 44%,transparent 70%);filter:blur(2px);animation:portalPulse 1.5s ease-in-out infinite}.ship-lights{position:absolute;inset:auto 16% 17%;display:flex;justify-content:space-between}.ship-lights i{width:8px;height:8px;border-radius:50%;background:#6fd8ff;box-shadow:0 0 13px #6fd8ff}.ship-lights i:nth-child(2),.ship-lights i:nth-child(5){background:#c6a8ff;box-shadow:0 0 13px #c6a8ff}.loader.unlock .door-left{transform:translateX(-105%)}.loader.unlock .door-right{transform:translateX(105%)}.loader.unlock .airlock{box-shadow:0 0 0 3px #080c1b,0 0 0 5px #7385aa,0 0 85px #bcecffaa}.loader.enter .ship-stage{animation:none!important;transform:scale(16);opacity:0}.loader.enter .whiteout{animation:spaceFlash 1.2s .18s var(--ease) forwards}.loader-status{color:#d7f5ff}.loader-line:after{background:linear-gradient(90deg,transparent,#6fd8ff,#c6a8ff,transparent)}@keyframes shipHover{50%{transform:translateY(-11px) rotate(.35deg)}}@keyframes enginePulse{50%{transform:scale(.86);filter:brightness(1.35)}}@keyframes portalPulse{50%{transform:scale(1.16);filter:blur(4px) brightness(1.5)}}@keyframes spaceFlash{0%{opacity:0}32%,78%{opacity:1}100%{opacity:0}}@media(max-width:650px){.ship-stage{width:94vw}.spaceship{transform:scale(.92)}.loader-copy{margin-top:12px}}@media(prefers-reduced-motion:reduce){.ship-stage,.engine,.door-core{animation:none!important}}
+.loader.enter .ship-stage{animation:none!important;transform:none;opacity:1}.loader.enter .spaceship{transform-origin:50% 35%;animation:airlockDive 1.28s cubic-bezier(.72,0,.22,1) forwards}.loader.enter .loader-copy{opacity:0;transform:translateY(12px);transition:opacity .22s,transform .22s}.loader.enter .whiteout{animation:airlockWhite .58s .72s ease-in forwards}@keyframes airlockDive{0%{transform:scale(1);filter:brightness(1)}28%{transform:scale(1.22);filter:brightness(1.08)}70%{transform:scale(6);filter:brightness(1.3)}100%{transform:scale(24);filter:brightness(2.2)}}@keyframes airlockWhite{0%{opacity:0}100%{opacity:1}}
+.project-actions{margin-top:20px}.project-actions .btn{width:max-content;background:linear-gradient(100deg,rgba(111,216,255,.12),rgba(198,168,255,.14));border-color:#a98cff66;color:#eeeaff}.project-actions .btn:after{content:"↗";font-size:1rem;color:var(--aqua)}.project-actions .btn:hover{background:var(--acid);color:#080a16;box-shadow:0 0 30px #8b5dff44}
+.ship-stage{z-index:3;will-change:transform;backface-visibility:hidden;transform:translateZ(0)}.spaceship{will-change:transform;backface-visibility:hidden;transform:translateZ(0)}.warp-lines{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}.warp-lines i{position:absolute;left:50%;top:45%;width:clamp(70px,12vw,190px);height:1px;background:linear-gradient(90deg,transparent,#b9edff 52%,#fff);box-shadow:0 0 8px #6fd8ff;transform-origin:left center;opacity:0;animation:warpLine 1.35s linear infinite;animation-delay:var(--delay);transform:rotate(var(--angle)) translateX(80px) scaleX(.1)}.loader.enter .warp-lines i{animation-duration:.44s}.loader-rocks{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none}.loader-rocks i{position:absolute;left:var(--left);top:var(--top);width:var(--size);height:calc(var(--size)*.72);border-radius:46% 54% 42% 58%/55% 42% 58% 45%;background:radial-gradient(circle at 28% 23%,#9298ae 0 7%,#41485f 28%,#171b2d 66%,#070914 100%);box-shadow:inset -8px -7px 13px #02030bbb,0 9px 18px #0009;opacity:0;will-change:transform;animation:loaderRock var(--speed) linear infinite;animation-delay:var(--delay)}.loader-rocks i:after{content:"";position:absolute;width:25%;height:22%;left:18%;top:20%;border-radius:50%;background:#171a2a88;box-shadow:inset 2px 2px 4px #9da2b033}.loader.enter .loader-rocks i{animation-duration:.72s}.loader.enter .spaceship{animation:airlockDiveSmooth 1.6s cubic-bezier(.2,.72,.18,1) forwards;transform-origin:50% 35%}.loader.enter .whiteout{animation:airlockWhiteSmooth .52s 1.08s ease-in forwards}@keyframes warpLine{0%{opacity:0;transform:rotate(var(--angle)) translateX(55px) scaleX(.08)}18%{opacity:.78}100%{opacity:0;transform:rotate(var(--angle)) translateX(72vw) scaleX(3.2)}}@keyframes loaderRock{0%{opacity:0;transform:translate3d(0,0,0) scale(.25) rotate(0)}16%{opacity:.72}100%{opacity:0;transform:translate3d(var(--dx),var(--dy),0) scale(3.4) rotate(240deg)}}@keyframes airlockDiveSmooth{0%{transform:translate3d(0,0,0) scale(1)}20%{transform:translate3d(0,0,0) scale(1.08)}48%{transform:translate3d(0,0,0) scale(2.15)}74%{transform:translate3d(0,0,0) scale(6.8)}100%{transform:translate3d(0,0,0) scale(25)}}@keyframes airlockWhiteSmooth{from{opacity:0}to{opacity:1}}@media(prefers-reduced-motion:reduce){.warp-lines,.loader-rocks{display:none}}
+.loader.enter .spaceship{animation:airlockDiveFinal 1.6s cubic-bezier(.45,0,.82,1) forwards;transform-origin:50% 35%}.whiteout{inset:auto;left:50%;top:45%;width:12vmax;height:12vmax;border-radius:50%;opacity:1;transform:translate3d(-50%,-50%,0) scale(0);will-change:transform;backface-visibility:hidden}.loader.enter .whiteout{animation:portalWhiteFinish .68s .92s cubic-bezier(.22,.72,.3,1) forwards}@keyframes airlockDiveFinal{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(0,0,0) scale(7.5)}}@keyframes portalWhiteFinish{from{transform:translate3d(-50%,-50%,0) scale(0)}to{transform:translate3d(-50%,-50%,0) scale(20)}}
+.whiteout{inset:0;left:0;top:0;width:auto;height:auto;border-radius:0;transform:none;opacity:0;will-change:opacity}.loader.enter .whiteout{animation:fullWhiteFade .58s 1.08s ease-in-out forwards}@keyframes fullWhiteFade{from{opacity:0}to{opacity:1}}
+.whiteout{z-index:999!important;pointer-events:none}.loader.enter .whiteout{opacity:0;animation:fullWhiteCover .55s 1.08s ease-in-out forwards!important}@keyframes fullWhiteCover{0%{opacity:0}100%{opacity:1}}
+.hero-in>div:first-child{min-width:0}h1{font-size:clamp(2.85rem,7.2vw,6.7rem);max-width:100%}@media(max-width:520px){h1{font-size:clamp(2.55rem,12vw,3.8rem);letter-spacing:-.075em}}
 </style>
-
-<div class="lb-backdrop" id="lightbox" aria-hidden="true">
-  <div class="lb-frame" role="dialog" aria-label="Image preview">
-    <button class="lb-x" id="lbClose" aria-label="Close">✕</button>
-    <button class="lb-prev" id="lbPrev" aria-label="Previous">‹</button>
-    <img class="lb-img" id="lbImg" alt="">
-    <button class="lb-next" id="lbNext" aria-label="Next">›</button>
-    <div class="lb-cap" id="lbCap"></div>
-  </div>
+</head>
+<body class="booting">
+<div class="loader" id="loader" role="status" aria-live="polite" aria-label="Secure portfolio loading">
+  <div class="warp-lines" aria-hidden="true"><i style="--angle:8deg;--delay:-.2s"></i><i style="--angle:31deg;--delay:-.9s"></i><i style="--angle:57deg;--delay:-.5s"></i><i style="--angle:84deg;--delay:-1.2s"></i><i style="--angle:112deg;--delay:-.35s"></i><i style="--angle:139deg;--delay:-1s"></i><i style="--angle:166deg;--delay:-.65s"></i><i style="--angle:194deg;--delay:-1.3s"></i><i style="--angle:222deg;--delay:-.45s"></i><i style="--angle:248deg;--delay:-1.05s"></i><i style="--angle:278deg;--delay:-.7s"></i><i style="--angle:305deg;--delay:-1.4s"></i><i style="--angle:334deg;--delay:-.55s"></i></div>
+  <div class="loader-rocks" aria-hidden="true"><i style="--left:43%;--top:44%;--size:20px;--dx:-48vw;--dy:-30vh;--speed:3.3s;--delay:-.5s"></i><i style="--left:55%;--top:41%;--size:13px;--dx:42vw;--dy:-35vh;--speed:2.8s;--delay:-1.7s"></i><i style="--left:47%;--top:52%;--size:25px;--dx:-41vw;--dy:39vh;--speed:3.8s;--delay:-2.4s"></i><i style="--left:53%;--top:49%;--size:17px;--dx:46vw;--dy:33vh;--speed:3s;--delay:-1.1s"></i><i style="--left:49%;--top:38%;--size:10px;--dx:-18vw;--dy:-46vh;--speed:2.5s;--delay:-.9s"></i><i style="--left:58%;--top:47%;--size:15px;--dx:49vw;--dy:6vh;--speed:3.5s;--delay:-2.8s"></i></div>
+  <div class="loader-grid"></div><div class="loader-glow"></div><div class="scan-ring"></div>
+  <div class="lock-stage ship-stage">
+    <div class="spaceship" aria-hidden="true"><i class="ship-wing left"></i><i class="ship-wing right"></i><div class="ship-hull"><div class="airlock"><div class="door-frame"><div class="door-core"></div><i class="door-left"></i><i class="door-right"></i></div></div><div class="ship-lights"><i></i><i></i><i></i><i></i><i></i><i></i></div></div><i class="engine left"></i><i class="engine right"></i></div>
+    <div class="loader-copy"><span class="loader-status" id="loaderStatus">Approaching secure airlock</span><span class="loader-line"></span></div>
+  </div><div class="whiteout"></div>
 </div>
-
+<noscript><style>.loader{display:none!important}.booting{overflow:auto}.booting main,.booting footer,.booting .nav{visibility:visible}</style></noscript>
+<svg width="0" height="0" aria-hidden="true"><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="22" result="blur"/><feColorMatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 30 -12"/></filter></svg>
+<div class="cosmos" aria-hidden="true"><div class="milky-way"></div><div class="moon"></div></div><canvas id="flow" aria-hidden="true"></canvas><div class="ambient"></div><div class="space-rocks" aria-hidden="true"><i style="--s:96px;--x:4%;--y:17%;--o:.68;--d:13s;--r:18deg;--dx:42px;--dy:-28px;--z:45px"></i><i style="--s:60px;--x:88%;--y:36%;--o:.72;--d:10s;--r:-24deg;--dx:-38px;--dy:28px;--z:80px"></i><i style="--s:132px;--x:80%;--y:79%;--o:.48;--d:17s;--r:42deg;--dx:48px;--dy:-38px;--z:15px"></i><i style="--s:47px;--x:14%;--y:70%;--o:.6;--d:9s;--r:-8deg;--dx:-24px;--dy:-31px;--z:95px"></i><i style="--s:72px;--x:48%;--y:8%;--o:.48;--d:15s;--r:31deg;--dx:30px;--dy:34px;--z:25px"></i><i style="--s:34px;--x:67%;--y:57%;--o:.5;--d:11s;--r:12deg;--dx:-22px;--dy:27px;--z:110px"></i><i style="--s:52px;--x:30%;--y:88%;--o:.38;--d:18s;--r:-35deg;--dx:29px;--dy:-20px;--z:10px"></i></div><div class="cursor"></div><a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap nav-in"><a class="logo" href="#home">CE<b>O.</b></a><nav class="links" aria-label="Main navigation"><a href="#about">About</a><a href="#work">Projects</a><a class="mini-cta" href="#contact">Let's talk</a></nav></div></header>
+<main id="main">
+<section class="hero" id="home"><div class="wrap hero-in"><div><p class="tag">Cybersecurity / Applied security research</p><h1><span class="line"><span>CHUKWUMA</span></span><span class="line"><span>EJEKUTE-OBI</span></span></h1><p class="lead">I investigate how vulnerabilities affect software, networks, endpoints, and embedded systems—then document practical ways to detect and mitigate them. Cybersecurity graduate focused on hands-on research and defensive security.</p><div class="buttons"><a class="btn hot magnetic" href="#work">Explore work <b>↓</b></a><a class="btn magnetic" href="mailto:chumaejekuteobi@gmail.com">Start a conversation ↗</a></div></div><div class="visual"><div class="liquid"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i></div><div class="photo-shell"><img class="photo" src="images/chuma.jpg" alt="Chukwuma Ejekute-Obi in professional attire"></div><div class="badge"><i></i>Open to opportunities</div></div></div></section>
+<div class="ticker" aria-hidden="true"><div class="track"><span>Application security</span><span>Malware analysis</span><span>Network defense</span><span>Embedded research</span><span>Threat detection</span><span>Application security</span><span>Malware analysis</span><span>Network defense</span><span>Embedded research</span><span>Threat detection</span></div></div>
+<section id="about"><div class="wrap"><div class="head reveal"><span class="no">01 / PROFILE</span><div><h2>Security is a mindset,<br>not just a toolset.</h2><p>I’m driven to understand what happens beneath the surface—and turn that knowledge into stronger systems.</p></div></div><div class="about"><article class="glass tilt reveal"><p class="statement">I’m a cybersecurity graduate who builds <em>hands-on security projects</em> to study vulnerabilities, attacker behavior, detection workflows, and practical mitigations.</p><div class="pills"><span class="pill">Burp Suite</span><span class="pill">VirusTotal API</span><span class="pill">Wireshark</span><span class="pill">Python</span><span class="pill">PowerShell</span><span class="pill">IDA</span></div></article><aside class="glass facts tilt reveal"><div class="fact"><span>Focus</span><b>Applied Security Research</b></div><div class="fact"><span>Mindset</span><b>Curious + Defensive</b></div><div class="fact"><span>Environment</span><b>Windows / Linux</b></div><div class="fact"><span>Goal</span><b>Security Analysis</b></div></aside></div></div></section>
+<section id="work"><div class="wrap"><div class="head reveal"><span class="no">02 / SELECTED WORK</span><div><h2>Built to answer real<br>security questions.</h2><p>Hands-on projects across embedded security, endpoint monitoring, network analysis, and authorized web application testing.</p></div></div><div class="work-list">
+<article class="project reveal"><div class="copy"><span class="pn">PROJECT / 01</span><h3>Pixhawk Security Research</h3><p>Performed hands-on embedded-security research by identifying memory components, connecting a universal programmer, extracting firmware data, and reviewing the resulting binary through static-analysis workflows. The project strengthened my understanding of firmware acquisition, hardware interfaces, and evidence-driven vulnerability research.</p><div class="pills"><span class="pill">Firmware Extraction</span><span class="pill">Binary Analysis</span><span class="pill">IDA</span><span class="pill">Embedded Security</span></div></div><div class="screen"><img src="images/pixhawk-lab.jpg" alt="Pixhawk hardware research workstation"><img src="images/pixhawk-programmer.jpg" alt="Universal programmer connected for firmware extraction"></div></article>
+<article class="project reveal"><div class="copy"><span class="pn">PROJECT / 02</span><h3>RDP Security Lab</h3><p>Built an isolated Windows and Kali Linux lab to examine remote-access risk, defensive configuration, and controlled credential-exposure scenarios. I used PowerShell automation to switch lab protections, validated connectivity behavior, and documented how hardening choices affect the attack surface.</p><div class="pills"><span class="pill">PowerShell</span><span class="pill">FreeRDP</span><span class="pill">Windows Security</span><span class="pill">VirtualBox</span></div></div><div class="screen"><img src="images/rdp-automation.png" alt="PowerShell security automation menu in the RDP lab"><img src="images/rdp-lab.png" alt="Isolated Kali Linux and Windows RDP testing environment"></div></article>
+<article class="project reveal"><div class="copy"><span class="pn">PROJECT / 03</span><h3>Network Detection Script</h3><p>Developed and tested a network-analysis utility with traffic-sniffing, DNS observation, SYN and UDP scanning, URL scanning, and port-reconnaissance features. I validated it on my own authorized network and reviewed IPv4, IPv6, TCP, UDP, and DNS activity to understand how useful indicators appear in live traffic.</p><div class="pills"><span class="pill">Python</span><span class="pill">Packet Analysis</span><span class="pill">DNS Monitoring</span><span class="pill">Nmap</span></div></div><div class="screen"><img src="images/network-dns.png" alt="Network detector identifying DNS queries"><img src="images/network-sniffer.png" alt="Network detector traffic-sniffer menu tested on an authorized network"></div></article>
+<article class="project reveal"><div class="copy"><span class="pn">PROJECT / 04</span><h3>InfectionPoint Threat Detection</h3><p>Integrated a VirusTotal-backed file-reputation workflow that checks hashes and reports results inside the application activity log. I also worked on PID Screamer process monitoring, which highlights high CPU usage and suspicious process indicators for further analyst review.</p><div class="pills"><span class="pill">VirusTotal API</span><span class="pill">File Hashing</span><span class="pill">Process Monitoring</span><span class="pill">Threat Triage</span></div></div><div class="screen"><img src="images/infectionpoint-scan.png" alt="InfectionPoint file scan and VirusTotal activity log"><img src="images/infectionpoint-pid.png" alt="PID Screamer process monitoring results"></div></article>
+<article class="project reveal"><div class="copy"><span class="pn">PROJECT / 05</span><h3>Web Application Security Labs</h3><p>Used Burp Suite in authorized environments to map application endpoints, inspect requests and responses, review cookie and session handling, configure Intruder payload positions, and replay requests with Repeater. I documented exposed development resources and access-control weaknesses while distinguishing confirmed findings from behavior caused by a static local server.</p><div class="pills"><span class="pill">Burp Suite</span><span class="pill">OWASP</span><span class="pill">Session Review</span><span class="pill">Attack-Surface Mapping</span></div></div><div class="screen"><img src="images/web-cookie-review.png" alt="Burp Suite review of request cookies and application assets"><img src="images/web-endpoint-mapping.png" alt="Burp Suite site map revealing a local backup endpoint"></div></article>
+</div></div></section>
+<section id="contact"><div class="wrap"><div class="contact-card reveal"><span class="no">03 / CONTACT</span><h2>LET’S SECURE<br>WHAT’S NEXT.</h2><p>I’m ready to bring curiosity, discipline, and hands-on security experience to a team that values growth and meaningful defense.</p><div class="buttons"><a class="btn hot magnetic" href="mailto:chumaejekuteobi@gmail.com">Email Chukwuma ↗</a><a class="btn magnetic" href="https://www.linkedin.com/in/chukwuma-ejekute-obi-5a390925b" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div></div></section>
+</main><footer><div class="wrap foot"><span>© <span id="year"></span> Chukwuma Ejekute-Obi</span><span>Designed for defense. Built with intent.</span></div></footer>
 <script>
-(() => {
-  const galleries = [...document.querySelectorAll('.gallery')].map(g => [...g.querySelectorAll('img')]);
-  const box = document.getElementById('lightbox');
-  const img = document.getElementById('lbImg');
-  const cap = document.getElementById('lbCap');
-  const btnPrev = document.getElementById('lbPrev');
-  const btnNext = document.getElementById('lbNext');
-  const btnClose = document.getElementById('lbClose');
-
-  let gIdx = 0, iIdx = 0;
-
-  const open = (g, i) => {
-    gIdx = g; iIdx = i;
-    const el = galleries[gIdx][iIdx];
-    img.src = el.src;
-    img.alt = el.alt || '';
-    cap.textContent = el.closest('figure')?.querySelector('figcaption')?.textContent?.trim() || '';
-    box.classList.add('open'); box.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  };
-  const close = () => {
-    box.classList.remove('open'); box.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    img.src = ''; cap.textContent = '';
-  };
-  const nav = (dir) => {
-    const len = galleries[gIdx].length;
-    iIdx = (iIdx + dir + len) % len;
-    img.src = galleries[gIdx][iIdx].src;
-    cap.textContent = galleries[gIdx][iIdx].closest('figure')?.querySelector('figcaption')?.textContent?.trim() || '';
-  };
-
-  // click bind for all gallery images
-  galleries.forEach((imgs, g) => imgs.forEach((el, i) => {
-    el.loading = 'lazy';
-    el.style.cursor = 'zoom-in';
-    el.addEventListener('click', () => open(g, i));
-  }));
-
-  // controls
-  btnClose.addEventListener('click', close);
-  btnPrev.addEventListener('click', () => nav(-1));
-  btnNext.addEventListener('click', () => nav(1));
-  box.addEventListener('click', (e) => { if (e.target === box) close(); });
-
-  // keyboard
-  window.addEventListener('keydown', (e) => {
-    if (!box.classList.contains('open')) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowLeft') nav(-1);
-    if (e.key === 'ArrowRight') nav(1);
-  });
-})();
+const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches, fine=matchMedia('(pointer:fine)').matches;
+const loader=document.getElementById('loader'),loaderStatus=document.getElementById('loaderStatus');
+if(reduced){document.body.classList.remove('booting');loader.classList.add('done')}else{
+  setTimeout(()=>{loaderStatus.textContent='Airlock open';loader.classList.add('unlock')},1050);
+  setTimeout(()=>{loaderStatus.textContent='Entering portfolio';loader.classList.add('enter')},2050);
+  setTimeout(()=>{document.body.classList.remove('booting');loader.classList.add('done')},4400);
+  setTimeout(()=>loader.remove(),5200);
+}
+document.getElementById('year').textContent=new Date().getFullYear();
+const projectLinks=[
+  'https://github.com/Security-AID/Security-AID-Projects/tree/main/projects/pixhawk-security-research',
+  'https://github.com/Security-AID/Security-AID-Projects/tree/main/projects/rdp-security-lab',
+  'https://github.com/Security-AID/Security-AID-Projects/tree/main/projects/network-detection-script',
+  'https://github.com/Security-AID/Security-AID-Projects/tree/main/projects/virustotal-mini-scanner',
+  'https://github.com/Security-AID/Security-AID-Projects/tree/main/projects/web-security-practice-labs'
+];
+document.querySelectorAll('.project .copy').forEach((copy,i)=>{if(!projectLinks[i])return;const actions=document.createElement('div');actions.className='project-actions';const link=document.createElement('a');link.className='btn magnetic';link.href=projectLinks[i];link.target='_blank';link.rel='noopener noreferrer';link.textContent='Investigate Project';link.setAttribute('aria-label','Investigate '+copy.querySelector('h3').textContent+' on GitHub');actions.append(link);copy.append(actions)});
+const nav=document.querySelector('.nav'),sections=[...document.querySelectorAll('main section[id]')],links=[...document.querySelectorAll('.links a[href^="#"]')];
+addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>30);let id='';sections.forEach(s=>{if(scrollY>s.offsetTop-300)id=s.id});links.forEach(a=>a.classList.toggle('active',a.hash==='#'+id))},{passive:true});
+const reveals=document.querySelectorAll('.reveal');if(reduced)reveals.forEach(x=>x.classList.add('on'));else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});reveals.forEach(x=>io.observe(x))}
+if(!reduced&&fine){const cur=document.querySelector('.cursor');addEventListener('pointermove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';document.documentElement.style.setProperty('--mx',e.clientX/innerWidth*100+'%');document.documentElement.style.setProperty('--my',e.clientY/innerHeight*100+'%')});document.querySelectorAll('a,summary').forEach(x=>{x.onmouseenter=()=>cur.classList.add('big');x.onmouseleave=()=>cur.classList.remove('big')});document.querySelectorAll('.tilt').forEach(card=>{card.onpointermove=e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;card.style.setProperty('--x',x*100+'%');card.style.setProperty('--y',y*100+'%');card.style.transform=`perspective(900px) rotateX(${(y-.5)*-4}deg) rotateY(${(x-.5)*5}deg)`};card.onpointerleave=()=>card.style.transform=''})}
+if(!reduced){const c=document.getElementById('flow'),ctx=c.getContext('2d'),stars=Array.from({length:220},()=>({x:Math.random(),y:Math.random(),z:.25+Math.random()*.75,r:.35+Math.random()*1.5,s:.00002+Math.random()*.000055,p:Math.random()*Math.PI*2})),blobs=Array.from({length:8},(_,i)=>({x:Math.random(),y:Math.random(),r:.18+Math.random()*.23,vx:(Math.random()-.5)*.00008,vy:(Math.random()-.5)*.000065,h:i%3}));let w,h,dpr,t=0;function size(){dpr=Math.min(devicePixelRatio,1.5);w=c.width=innerWidth*dpr;h=c.height=innerHeight*dpr;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px'}size();addEventListener('resize',size);function draw(){t+=.012;ctx.clearRect(0,0,w,h);ctx.globalCompositeOperation='source-over';stars.forEach(s=>{s.y+=s.s*16*s.z;if(s.y>1.02){s.y=-.02;s.x=Math.random()}const a=.2+s.z*.58+Math.sin(t*1.8+s.p)*.14;ctx.fillStyle=`rgba(239,236,255,${Math.max(.08,a)})`;ctx.beginPath();ctx.arc(s.x*w,s.y*h,s.r*dpr*s.z,0,Math.PI*2);ctx.fill()});ctx.globalCompositeOperation='lighter';blobs.forEach(b=>{b.x+=b.vx*16;b.y+=b.vy*16;if(b.x<-.25||b.x>1.25)b.vx*=-1;if(b.y<-.25||b.y>1.25)b.vy*=-1;const x=b.x*w,y=b.y*h,r=b.r*Math.min(w,h),g=ctx.createRadialGradient(x,y,0,x,y,r);const colors=['111,216,255','139,93,255','198,168,255'];g.addColorStop(0,`rgba(${colors[b.h]},.15)`);g.addColorStop(.45,`rgba(${colors[b.h]},.06)`);g.addColorStop(1,`rgba(${colors[b.h]},0)`);ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill()});ctx.globalCompositeOperation='source-over';requestAnimationFrame(draw)}draw()}
 </script>
-<!-- ===== /Lightbox ===== -->
-
-</body>
-</html>
-
-
+</body></html>
